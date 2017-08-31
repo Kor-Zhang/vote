@@ -5,28 +5,30 @@
 
 
 	<!-- 全局的package -->
-	<package name="base-package" extends="struts-default">
+	<package name="base-package" namespace="/" extends="struts-default">
 		<interceptors>
 			<!-- 检测用户是否离线 -->
-			<interceptor name="checkUserStatus"
-				class="com.zk.vote.interceptor.CheckUserStatusInterceptor">
+			<interceptor name="checkUserStatusInterceptor"
+				class="com.zk.vote.interceptor.CheckUsersStatusInterceptor">
 				<param name="excludeMethods">
 
 				</param>
 			</interceptor>
-			<!-- 全局栈 -->
+			<!-- 全局拦截栈 -->
 			<interceptor-stack name="base-stack">
 				<!-- 配置内建默认拦截器 -->
 				<interceptor-ref name="defaultStack" />
 				<!-- 配置自定义拦截器 -->
 				<!-- 检测用户是否离线拦截器 -->
-				<interceptor-ref name="encodingInterceptor"></interceptor-ref>
+				<interceptor-ref name="checkUserStatusInterceptor"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<!-- 本包默认拦截栈 -->
 		<default-interceptor-ref name="base-stack"></default-interceptor-ref>
 
 	</package>
+	
+	
 	<!-- 用户模块的package -->
 	<package name="user-package" namespace="/users" extends="base-package">
 		<!-- 全局的result -->
@@ -36,8 +38,11 @@
 			<result name="login">/view/login.jsp</result>
 		</global-results>
 		<!-- 配置action -->
-		<action name="usersAction" class="com.zk.vote.action.UsersAction">
 		
+		<!-- 配置usersAction -->
+		<!-- 利用了spring的bean作为class -->
+		<action name="usersAction" class="usersAction">
+			
 		</action>
 	</package>
 </struts>

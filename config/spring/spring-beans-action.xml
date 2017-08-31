@@ -7,7 +7,14 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/context 
 http://www.springframework.org/schema/context/spring-context-3.0.xsd
 ">
+	<!-- 配置action -->
+
+	<!-- 配置BaseAction -->
+	<bean id="baseAction" class="com.zk.vote.action.BaseAction">
+	</bean>
+	<!-- 配置UsersAction -->
 	<bean id="usersAction" class="com.zk.vote.action.UsersAction">
-		<property name="pageBean" ref="pageUser"></property>
-	</bean>	
+		<property name="pageBean" ref="pageUsers"></property>
+		<property name="usersService" ref="usersService"></property>
+	</bean>
 </beans>

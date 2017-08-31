@@ -20,6 +20,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 public class BaseAction extends ActionSupport {
 
+	
 	/**
 	 * Title:返回一个json到返回流
 	 * <p>
@@ -51,4 +52,5 @@ public class BaseAction extends ActionSupport {
 			pt.close();
 		}
 	}
+	
 }

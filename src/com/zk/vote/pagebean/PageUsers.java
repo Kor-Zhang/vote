@@ -15,34 +15,43 @@ import com.zk.vote.bean.Votes;
  * @date 2017年8月31日 下午3:13:22
  * @version 1.0
  */
-public class PageUsers extends Users {
-	private boolean isOnline;
-
-	public PageUsers() {
-		super();
+public class PageUsers {
+	private String id;
+	private String username;
+	private String password;
+	public String getId() {
+		return id;
 	}
-
-	public PageUsers(String id, String username, String password,
-			List<Votes> votes, List<UserVoteItem> userVoteItems) {
-		super(id, username, password, votes, userVoteItems);
+	public void setId(String id) {
+		this.id = id;
 	}
-
-	public PageUsers(boolean isOnline) {
-		super();
-		this.isOnline = isOnline;
+	public String getUsername() {
+		return username;
 	}
-
-	public boolean isOnline() {
-		return isOnline;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-
-	public void setOnline(boolean isOnline) {
-		this.isOnline = isOnline;
+	public String getPassword() {
+		return password;
 	}
-
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	@Override
 	public String toString() {
-		return "PageUsers [isOnline=" + isOnline + "]";
+		return "PageUsers [id=" + id + ", username=" + username + ", password="
+				+ password + "]";
 	}
+	public PageUsers(String id, String username, String password) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+	}
+	public PageUsers() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 }

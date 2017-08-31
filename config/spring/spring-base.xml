@@ -12,12 +12,19 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	<!-- 导入spring和mybatis整合配置文件 -->
 	<import resource="./spring-mybatis.xml"/>
 	
-	<!-- 导入action的bean的配置文件 -->
-	<import resource="./spring-beans-action.xml"/>
+	<!-- 导入bean的bean的配置文件 -->
+	<import resource="./spring-beans-bean.xml"/>
+	
+	<!-- 导入bean的bean的配置文件 -->
+	<import resource="./spring-beans-pagebean.xml"/>
+	
+	
+	<!-- 导入mapper的bean的配置文件 -->
+	<import resource="./spring-beans-mapper.xml"/>
 	
 	<!-- 导入service的bean的配置文件 -->
 	<import resource="./spring-beans-service.xml"/>
 	
-	<!-- 导入mapper的bean的配置文件 -->
-	<import resource="./spring-beans-mapper.xml"/>
+	<!-- 导入action的bean的配置文件 -->
+	<import resource="./spring-beans-action.xml"/>
 </beans>

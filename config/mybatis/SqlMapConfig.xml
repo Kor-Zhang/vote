@@ -28,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 批量别名定义（推荐） -->
 		<!-- package：指定包名称来为该包下的po类声明别名，默认的别名就是类名（首字母大小写都可） -->
 		<package name="com.zk.vote.bean" />
+		<package name="com.zk.vote.pagebean" />
 	</typeAliases>
 
 	<!-- 配置mybatis的环境信息，与spring整合，该信息由spring来管理,environments配置将被废除 -->
@@ -51,6 +52,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- <mapper resource="sqlmapper/Users.xml" /> -->
 
 		<!-- 批量加载映射文件,启用代理 -->
-		<package name="com.zk.vote.mapper" />
+		<!-- 和spring整合后,可以使用mybatis的扫描器,这里可以放弃 -->
+		<!-- <package name="com.zk.vote.mapper" /> -->
 	</mappers>
 </configuration>  

@@ -35,5 +35,7 @@
 	<constant name="struts.dispatcher.parametersWorkaround" value="false" />
 	
 	<!-- 其他struts文件 -->
-    <include file="./struts-project.xml"></include>
+    <include file="struts/struts-project.xml"></include>
+    
+    
 </struts>

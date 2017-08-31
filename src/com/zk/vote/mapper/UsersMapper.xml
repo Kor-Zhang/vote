@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- namespace指向具体的Mapper接口 -->
+<mapper namespace="com.zk.vote.mapper.UsersMapper">
+	<select id="selectUsers" resultType="Users">
+		select * from USERS
+	</select>
+	 <!-- 通过用户的id查找用户 -->
+	<select id="selectUserById" parameterType="string" resultType="Users">
+		select * from USERS where id=#{id}
+	</select>
+	 <!-- 通过用户的username查找用户 -->
+	<select id="selectUserByName" parameterType="string" resultType="Users">
+		select * from USERS where username=#{value}
+	</select>
+	<!-- 添加用户 -->
+	<insert id="insertUser" parameterType="Users">
+		insert into users values(#{id},#{username},#{password})
+	</insert>
+	
+	<!-- 根据id删除用户 -->
+	<delete id="deleteUserById" parameterType="string">
+		delete from users where id = #{value}
+	</delete>
+	<!-- 通过id更新用户 -->
+	<update id="updateUser" parameterType="Users">
+		update users set username = #{username},password = #{password} where id = #{id}
+	</update>
+	
+</mapper>

@@ -9,7 +9,8 @@
 </head>
 <body>
 	Vote登录
-	<form action="<c:url value='/users/usersAction!login.action'></c:url>">
+	<label>${msg}</label>
+	<form method="post" action="<c:url value='/users/usersAction!login.action'></c:url>">
 		<input name="username"/>
 		<input name="password"/>
 		<input type="submit"/>
