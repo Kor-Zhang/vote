@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+">
+
+	<!-- 加载数据库配置文件 -->
+	<context:property-placeholder location="classpath:db.properties" />
+	<!-- 配置c3p0数据源 -->
+	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<!-- 连接参数 -->
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<!-- 连接池最大使用连接数量 -->
+		<property name="maxActive" value="${c3p0.maxActive}" />
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="${c3p0.maxIdle}" />
+	</bean>
+
+
+	<!-- 配置mybatis的sqlSessionFactory -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+		<!-- 配置mybaits的全局配置文件 -->
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" 
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+
+	<!-- 全局的package -->
+	<package name="base-package" extends="struts-default">
+		<interceptors>
+			<!-- 检测用户是否离线 -->
+			<interceptor name="checkUserStatus"
+				class="com.zk.vote.interceptor.CheckUserStatusInterceptor">
+				<param name="excludeMethods">
+
+				</param>
+			</interceptor>
+			<!-- 全局栈 -->
+			<interceptor-stack name="base-stack">
+				<!-- 配置内建默认拦截器 -->
+				<interceptor-ref name="defaultStack" />
+				<!-- 配置自定义拦截器 -->
+				<!-- 检测用户是否离线拦截器 -->
+				<interceptor-ref name="encodingInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 本包默认拦截栈 -->
+		<default-interceptor-ref name="base-stack"></default-interceptor-ref>
+
+	</package>
+	<!-- 用户模块的package -->
+	<package name="user-package" namespace="/users" extends="base-package">
+		<!-- 全局的result -->
+		<global-results>
+			<result name="index">/view/index.jsp</result>
+			<result name="regist">/view/regist.jsp</result>
+			<result name="login">/view/login.jsp</result>
+		</global-results>
+		<!-- 配置action -->
+		<action name="usersAction" class="com.zk.vote.action.UsersAction">
+		
+		</action>
+	</package>
+</struts>
