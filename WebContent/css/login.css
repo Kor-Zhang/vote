@@ -7,6 +7,7 @@
 	
 }
 .middle{
+	border-radius:5px;
 	margin: 35px 0px;
 	background: rgb(122,164,207);
 	position: relative;

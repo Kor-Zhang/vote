@@ -23,31 +23,47 @@
 			<img alt="" src="<c:url value='/img/logo.gif'></c:url>" />
 		</div>
 		<div class="middle">
-			<form class="registForm" method="post"
-				action="<c:url value='/users/usersAction!regist.action'></c:url>">
-				<table>
-					<tr>
-						<td>用戶名:</td>
-						<td><input name="username" placeholder="请输入用户名"
-							value="" /></td>
-					</tr>
-					<tr>
-						<td>密碼:</td>
-						<td><input name="password" placeholder="请输入密码"
-							type="password" value="" /></td>
-					</tr>
-					<tr>
-						<td>密碼:</td>
-						<td><input name="rPassword" placeholder="请再次输入密码"
-							type="password" value="" /></td>
-					</tr>
-					<tr>
-						<td style="text-align: center;" colspan="2"><input
-							type="submit" /> 
-					</tr>
-				</table>
+			<div style="background: rgba(122,164,207,0.5);width:100%;height:30px;"></div>
+			<div class="registDiv">
+				<div
+					style="background: rgba(122, 164, 207, 0.5); width: 100%; height: 30px; line-height: 30px;">
+					<div
+						style="height: 30px; font-weight: bold; color: white; margin-left: 5px;">
+						新用户注册<label style="font-size: 14px; color: red;"> ${msg} </label>
+						
+					</div>
+				</div>
 
-			</form>
+				<div class="registFormDiv">
+					<form class="registForm" method="post"
+					action="<c:url value='/users/usersAction!regist.action'></c:url>">
+						<table>
+							<tr>
+								<td>用戶名:</td>
+								<td><input name="username" placeholder="请输入用户名" autocomplete="off" disableautocomplete 
+									value="${username}" /></td>
+							</tr>
+							<tr>
+								<td>密碼:</td>
+								<td><input name="password" placeholder="请输入密码" autocomplete="off" disableautocomplete 
+									type="password" value="${password}" /></td>
+							</tr>
+							<tr>
+								<td>确认密碼:</td>
+								<td><input name="rePassword" placeholder="请再次输入密码" autocomplete="off" disableautocomplete 
+									type="password" value="${rePassword}" /></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;" colspan="2">
+									<input type="submit" value=""/> 
+									<a style="display: block;height:30px;line-height: 30px;" href="<c:url value='/view/index.jsp'></c:url>">返回</a>
+								</td>
+							</tr>
+						</table>
+		
+					</form>
+				</div>
+			</div>
 		</div>
 		<div class="bottom">
 			<div

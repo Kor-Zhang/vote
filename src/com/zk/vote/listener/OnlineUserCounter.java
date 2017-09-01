@@ -30,9 +30,9 @@ public class OnlineUserCounter implements HttpSessionListener{
 	}
 
 	@Override
-	public void sessionDestroyed(HttpSessionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void sessionDestroyed(HttpSessionEvent s) {
+		ServletContext sc = s.getSession().getServletContext();Object num = sc.getAttribute(USER_NUMBER_FIELD);
+		sc.setAttribute(USER_NUMBER_FIELD, ((Integer)num)-1);
 	}
 
 }

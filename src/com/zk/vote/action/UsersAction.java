@@ -107,12 +107,20 @@ public class UsersAction extends BaseAction implements ModelDriven<PageUsers>{
 	 */
 	public String regist() throws Exception{
 		try{
+			//注册业务,等待捕获可能的异常
 			usersService.regist(pageBean);
+			
+			//注册成功
+			setRequestAttr("username", "");
+			setRequestAttr("password", "");
+			setRequestAttr("rePassword", "");
+			setRequestAttr("msg", "用户名为: "+pageBean.getUsername()+" 的用户注册成功");
 			
 		}catch(Exception e){
 			e.printStackTrace();
 			setRequestAttr("msg", e.getMessage());
 		}
+		
 		return "regist";
 	}
 	/**
@@ -128,6 +136,7 @@ public class UsersAction extends BaseAction implements ModelDriven<PageUsers>{
 	 */
 	public String logout() throws Exception{
 		removeSessionAttr(ONLINE_USER_FIELD);
+		getSession().invalidate();
 		setRequestAttr("msg", "注销成功");
 		return "login";
 	}

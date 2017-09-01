@@ -22,14 +22,18 @@ public class PageUsers extends Users{
 		return rememberMe;
 	}
 
-	public void setRememberMe(String rememberMe) {
-		this.rememberMe = rememberMe;
-	}
+	//注册使用的"再次输入密码"
+	private String rePassword;
+	
+	
+	
 
-	public PageUsers() {
+	public PageUsers(String rememberMe, String rePassword) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.rememberMe = rememberMe;
+		this.rePassword = rePassword;
 	}
+	
 
 	public PageUsers(String id, String username, String password,
 			List<Votes> votes, List<UserVoteItem> userVoteItems) {
@@ -37,9 +41,33 @@ public class PageUsers extends Users{
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public String getRePassword() {
+		return rePassword;
+	}
+
+	public void setRePassword(String rePassword) {
+		this.rePassword = rePassword;
+	}
+
+	public void setRememberMe(String rememberMe) {
+		this.rememberMe = rememberMe;
+	}
+
+	public PageUsers() {
+		super();
+	}
+
+
 	public PageUsers(String rememberMe) {
 		super();
 		this.rememberMe = rememberMe;
+	}
+
+	@Override
+	public String toString() {
+		return "PageUsers [rememberMe=" + rememberMe + ", rPassword="
+				+ rePassword + ", toString()=" + super.toString() + "]";
 	}
 	
 }

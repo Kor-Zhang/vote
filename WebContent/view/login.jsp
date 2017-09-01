@@ -58,18 +58,20 @@
 							<tr>
 								<td>用戶名:</td>
 								<td>
-									<input name="username" placeholder="请输入用户名"  value="<%=username %>"/>
+									<input name="username" placeholder="请输入用户名"  value="<%=username %>" autocomplete="off" disableautocomplete 
+									/>
 								</td>
 							</tr>
 							<tr>
 								<td>密碼:</td>
 								<td>
-									<input name="password" placeholder="请输入密码" type="password" value="<%=password %>"/>
+									<input name="password" placeholder="请输入密码" type="password" value="<%=password %>" autocomplete="off" disableautocomplete 
+									/>
 								</td>
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="2">
-									<input name="rememberMe" type="checkbox"/>记住我
+									<label><input name="rememberMe" type="checkbox"/>记住我</label>
 								</td>
 							</tr>
 							<tr>
