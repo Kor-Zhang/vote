@@ -17,4 +17,9 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		<property name="pageBean" ref="pageUsers"></property>
 		<property name="usersService" ref="usersService"></property>
 	</bean>
+	<!-- 配置VotesAction -->
+	<bean id="votesAction" class="com.zk.vote.action.VotesAction">
+		<property name="pageBean" ref="pageVotes"></property>
+		<property name="votesService" ref="votesService"></property>
+	</bean>
 </beans>

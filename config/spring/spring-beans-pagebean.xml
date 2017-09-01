@@ -7,8 +7,10 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/context 
 http://www.springframework.org/schema/context/spring-context-3.0.xsd
 ">
-	<!-- pageUser -->
+	<!-- pageUsers -->
 	<bean id="pageUsers" class="com.zk.vote.pagebean.PageUsers">
 	</bean>
-	
+	<!-- pageVotes -->
+	<bean id="pageVotes" class="com.zk.vote.pagebean.PageVotes">
+	</bean>
 </beans>

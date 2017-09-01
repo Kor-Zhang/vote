@@ -17,7 +17,7 @@ import com.zk.vote.util.Util;
  * @date 2017年8月31日 下午7:36:11
  * @version 1.0
  */
-public class UserService implements UsersServiceI {
+public class UsersService implements UsersServiceI {
 	/*usersMapper*/
 	private UsersMapper usersMapper;
 	

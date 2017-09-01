@@ -11,28 +11,36 @@ import com.zk.vote.util.ActionUtil;
  * <p>
  * Description:
  * <p>
+ * 
  * @author Kor_Zhang
  * @date 2017年8月31日 下午10:11:38
  * @version 1.0
  */
-public class OnlineUserCounter implements HttpSessionListener{
+public class OnlineUserCounter implements HttpSessionListener {
 	public static final String USER_NUMBER_FIELD = "onlineUserNumber";
+
 	@Override
 	public void sessionCreated(HttpSessionEvent s) {
 		ServletContext sc = s.getSession().getServletContext();
-		//累加数量
+		// 累加数量
 		Object num = sc.getAttribute(USER_NUMBER_FIELD);
-		if(null == num){
+		if (null == num) {
 			num = 0;
 		}
-		sc.setAttribute(USER_NUMBER_FIELD, ((Integer)num)+1);
-		
+		sc.setAttribute(USER_NUMBER_FIELD, ((Integer) num) + 1);
+
 	}
 
 	@Override
 	public void sessionDestroyed(HttpSessionEvent s) {
-		ServletContext sc = s.getSession().getServletContext();Object num = sc.getAttribute(USER_NUMBER_FIELD);
-		sc.setAttribute(USER_NUMBER_FIELD, ((Integer)num)-1);
+		ServletContext sc = s.getSession().getServletContext();
+		Object n = sc.getAttribute(USER_NUMBER_FIELD);
+		if (null == n || ((Integer) n) < 0) {
+			sc.setAttribute(USER_NUMBER_FIELD, 0);
+		} else {
+			sc.setAttribute(USER_NUMBER_FIELD, ((Integer) n) - 1);
+		}
+
 	}
 
 }

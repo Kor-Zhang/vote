@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.zk.vote.mapper.VotesMapper">
+
+
+	<select id="selectVotesByPage" parameterType="PageVotes" resultType="Votes">
+		SELECT * FROM (SELECT t.*,ROWNUM r FROM votes t WHERE ROWNUM&gt;=#{start} ORDER BY t.TIME) tt WHERE tt.r &lt;= #{end}
+	</select>
+	
+</mapper>

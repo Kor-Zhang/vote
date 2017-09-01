@@ -76,7 +76,7 @@
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="2">
-									<input type="submit"/>
+									<input style="cursor: pointer;" type="submit"/>
 									<a href="<c:url value='/view/regist.jsp'></c:url>">新用户注册</a>
 								</td>
 							</tr>

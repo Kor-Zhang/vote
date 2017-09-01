@@ -10,4 +10,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	<!-- Users -->
 	<bean id="users" class="com.zk.vote.bean.Users">
 	</bean>
+	<!-- Votes -->
+	<bean id="votes" class="com.zk.vote.bean.Votes">
+	</bean>
 </beans>
