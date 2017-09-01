@@ -40,6 +40,7 @@ public class Votes implements Serializable {
 				+ selectWay + ", launcher=" + launcher + ", voteItems="
 				+ voteItems + "]";
 	}
+	
 	public String getId() {
 		return id;
 	}

@@ -65,12 +65,13 @@ public class VotesService implements VotesServiceI {
 		if(pageBean.getLauncherId() == null || pageBean.getLauncherId().equals("")){
 			throw new Exception("您已离线");
 		}
-		Util.l.info(pageBean);
+		
+		String auncherId = pageBean.getLauncherId();
 		
 		Votes vote = pageBean;
 		
 		Users u = new Users();
-		u.setId(pageBean.getId());
+		u.setId(auncherId);
 		
 		vote.setLauncher(u);
 		

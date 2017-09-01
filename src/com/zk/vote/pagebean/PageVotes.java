@@ -36,7 +36,7 @@ public class PageVotes extends Votes {
 	
 	private String launcherId;
 	
-	
+	private String vItems;
 
 	
 	
@@ -49,6 +49,13 @@ public class PageVotes extends Votes {
 		super(id, theme, selectWay, launcher, time, voteItems);
 		// TODO Auto-generated constructor stub
 	}
+	public String getvItems() {
+		return vItems;
+	}
+	public void setvItems(String vItems) {
+		this.vItems = vItems;
+	}
+	
 	public String getLauncherId() {
 		return launcherId;
 	}

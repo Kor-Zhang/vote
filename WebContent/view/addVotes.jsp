@@ -40,7 +40,7 @@
 				</tr>
 				<tr class="voteItemsTr">
 					<td class="tabFirstTd">投票選項:</td>
-					<td class="tabSecondTd"><input type="text" name="voteItems"/></td>
+					<td class="tabSecondTd"><input type="text" name="vItems"/></td>
 					<td class="tabThirdTd"></td>
 				</tr>
 				
