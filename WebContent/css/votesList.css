@@ -1,0 +1,90 @@
+.contentDiv {
+	width: 100%;
+	height: 100%;
+}
+.contentDiv a {
+	color: rgb(100, 166, 255);
+	text-decoration: none;
+	font-weight: bold;
+}
+.titleDiv {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+}
+
+.titleDiv>* {
+	height: 50px;
+	line-height: 50px;
+	float: left;
+}
+
+.titleFont {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+
+
+.votesTabDiv {
+	width: 99%;
+}
+
+.votesTabDiv table {
+	width: 100%;
+	border-bottom: 1px solid rgb(240,240,240);
+	
+	/* border-right: 1px solid #804040; */
+	/* 取消td间隙 */
+	border-collapse: collapse;
+	
+	
+}
+
+.votesTabDiv table td {
+	/* border-left: 1px solid #804040; */
+	border-top: 1px solid rgb(240,240,240);
+	height:60px;
+	padding:0px 20px;
+	
+	
+}
+/* 选择奇数行 */
+.votesTabDiv table tr:nth-child(odd) td{
+	background: rgb(249,249,249);
+}
+
+.drecDiv {
+	color:rgba(150,150,150);
+	font-size: 13px;
+	
+}
+.votesTabDiv .firstTd {
+	width: 80%;
+}
+
+.votesTabDiv .secondTd {
+	width: 20%;
+}
+
+.vote_icon{
+	background-image: url("../img/vote_icon.gif");
+	background-position:left;
+	background-repeat:no-repeat;
+	padding-left: 18px;
+	font-size: 16px;
+}
+.join_icon{
+	background-image: url("../img/join.gif");
+	background-position:left;
+	background-repeat:no-repeat;
+	padding-left: 18px;
+}
+
+.pager{
+	margin-top:20px;
+	width:20%;
+	margin-left: 40%;
+	text-align: center;
+	
+}

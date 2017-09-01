@@ -8,7 +8,7 @@
 		<welcome-file>/view/index.jsp</welcome-file>
 	</welcome-file-list>
 	<session-config>
-		<session-timeout>1</session-timeout>
+		<session-timeout>60</session-timeout>
 	</session-config>
 
 
@@ -25,7 +25,7 @@
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
 
-
+	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/spring-base.xml</param-value>
@@ -33,11 +33,11 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
-	
-	
-	
-	
+
+
+
+
+
 	<filter>
 		<filter-name>encoder</filter-name>
 		<filter-class>com.zk.vote.filter.Encoder</filter-class>
@@ -46,13 +46,14 @@
 		<filter-name>encoder</filter-name>
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
-	
+
 	<filter>
 		<filter-name>checkUserStatus</filter-name>
 		<filter-class>com.zk.vote.filter.CheckUserStatus</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>checkUserStatus</filter-name>
+		<!-- /view/protected/*.jsp是不被允许的 -->
 		<url-pattern>/view/index.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>

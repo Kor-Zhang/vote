@@ -30,7 +30,7 @@
 	
 	
 	<!-- 用户模块的package -->
-	<package name="user-package" namespace="/users" extends="base-package">
+	<package name="users-package" namespace="/users" extends="base-package">
 		<!-- 全局的result -->
 		<global-results>
 			<result name="index">/view/index.jsp</result>
@@ -46,6 +46,22 @@
 		<!-- 配置usersAction -->
 		<!-- 利用了spring的bean作为class -->
 		<action name="usersAction" class="usersAction">
+			
+		</action>
+	</package>
+	<!-- votes模块的package -->
+	<package name="votes-package" namespace="/votes" extends="base-package">
+		<!-- 全局的result -->
+		<global-results>
+			<result name="msg">/view/msg.jsp</result>
+			<result name="votesList">/view/votesList.jsp</result>
+			<result name="rvotesList" type="redirect">/view/votesList.jsp</result>
+		</global-results>
+		<!-- 配置action -->
+		
+		<!-- 配置votesAction -->
+		<!-- 利用了spring的bean作为class -->
+		<action name="votesAction" class="votesAction">
 			
 		</action>
 	</package>

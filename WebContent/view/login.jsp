@@ -19,14 +19,20 @@
 	String username = "";
 	String password = "";
 	Cookie[] cs = request.getCookies();
-	for(Cookie c :cs){
-		if(c.getName().equals("username")){
-			username = c.getValue();
-		}
-		if(c.getName().equals("password")){
-			password = c.getValue();
+	if(null != cs){
+		for(Cookie c :cs){
+			if(null != c){
+				if(c.getName().equals("username")){
+					username = c.getValue();
+				}
+				if(c.getName().equals("password")){
+					password = c.getValue();
+				}
+			}
+			
 		}
 	}
+	
 %>
 <html>
 <head>
@@ -76,7 +82,7 @@
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="2">
-									<input style="cursor: pointer;" type="submit"/>
+									<input value="提交" style="cursor: pointer;" type="submit"/>
 									<a href="<c:url value='/view/regist.jsp'></c:url>">新用户注册</a>
 								</td>
 							</tr>

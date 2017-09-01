@@ -7,7 +7,12 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 	<select id="selectVotesByPage" parameterType="PageVotes" resultType="Votes">
-		SELECT * FROM (SELECT t.*,ROWNUM r FROM votes t WHERE ROWNUM&gt;=#{start} ORDER BY t.TIME) tt WHERE tt.r &lt;= #{end}
+		SELECT * FROM (SELECT t.*,ROWNUM r FROM votes t WHERE ROWNUM&lt;=#{end} ORDER BY t.TIME) tt WHERE tt.r &gt;= #{start}
 	</select>
-	
+	<select id="selectCount" resultType="int">
+		SELECT count(*) from votes
+	</select>
+	<insert id="insertVote" parameterType="Votes">
+		insert into votes values(#{id},#{theme},#{launcher.id},#{selectway},#{time});
+	</insert>
 </mapper>

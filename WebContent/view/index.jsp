@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>注册页面</title>
+<title>主页</title>
 <link rel="stylesheet" href="<c:url value='/css/global.css'></c:url>" />
 <link rel="stylesheet" href="<c:url value='/css/index.css'></c:url>" />
 
@@ -25,13 +25,16 @@
 		<div class="middle">
 			<ul class="navbar">
 				<li>
-					<span >欢迎,<span style="color: red;">${user.username}</span> </span>
+					<span >欢迎,<span style="color: red;">${user.username}</span> 
+						,
+						<a href="<c:url value='/users/usersAction!logout.action'></c:url>">注销</a>
+					</span>
 				</li>
 				<li>
-					<a class="backListIcon" target="viewsIframe" href="<c:url value='/users/votesAtion!selectVotes?page=1'></c:url>">返回列表</a>
+					<a class="backListIcon" target="viewsIframe" href="<c:url value='/votes/votesAction!selectVotesByPage.action?page=1'></c:url>">返回列表</a>
 				</li>
 				<li>
-					<a class="addVoteIcon" target="viewsIframe" href="">添加新投票</a>
+					<a class="addVoteIcon" target="viewsIframe" href="<c:url value='/view/addVotes.jsp'></c:url>">添加新投票</a>
 				</li>
 				<li>
 					<a class="repairIcon" target="viewsIframe" href="">维护</a>
@@ -39,12 +42,14 @@
 				<li>
 					<form class="searchForm" action="" target="viewsIframe">
 						<input name="kw" placeholder="请输入投票关键字"/>
-						<input type="submit"/>
+						<input type="submit" value="搜索"/>
+						
 					</form>
 				</li>
 			</ul>
+			<div class="displayOnlineNumber">当前在线人数:${onlineUserNumber}</div>
 			<!-- 显示其他jsp -->
-			<iframe name="viewsIframe" class="viewsIframe" src="<c:url value='/users/votesAtion!selectVotes?page=1'></c:url>">
+			<iframe name="viewsIframe" class="viewsIframe" src="<c:url value='/votes/votesAction!selectVotesByPage.action?page=1'></c:url>">
 					
 			</iframe>
 		</div>
@@ -56,4 +61,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

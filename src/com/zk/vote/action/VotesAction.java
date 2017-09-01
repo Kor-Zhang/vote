@@ -1,6 +1,7 @@
 package com.zk.vote.action;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.zk.vote.bean.Users;
 import com.zk.vote.pagebean.PageVotes;
 import com.zk.vote.service.VotesServiceI;
 
@@ -41,6 +42,55 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 		this.votesService = votesService;
 	}
 	
+	/**
+	 * Title:分页查找votes
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月1日 下午1:49:04
+	 * @version 1.0
+	 * @return
+	 */
+	public String selectVotesByPage(){
+		try{
+			
+			pageBean = votesService.selectVotesByPage(pageBean);
+			setRequestAttr("votes", pageBean);
+		}catch(Exception e){
+			e.printStackTrace();
+			setRequestAttr("msg", e.getMessage());
+		}
+		return "votesList";
+	}
 	
-	
+	/**
+	 * Title:添加投票及其选项
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月1日 下午6:14:19
+	 * @version 1.0
+	 * @return
+	 */
+	public String addVotesAndItems(){
+
+			setRequestAttr("curl","/view/addVotes.jsp");
+			try{
+				//设置launcherid
+				Users u = (Users)getSessionAttr(UsersAction.ONLINE_USER_FIELD);
+				pageBean.setLauncherId(u.getId());
+				
+				votesService.insertVotesAndItems(pageBean);
+
+				setRequestAttr("msg", "添加成功");
+			}catch(Exception e){
+				e.printStackTrace();
+				setRequestAttr("msg", e.getMessage());
+			}
+		
+		
+		return "msg";
+	}
 }

@@ -27,4 +27,28 @@ public interface VotesMapper {
 	 * @return
 	 */
 	public List<Votes> selectVotesByPage(PageVotes pageBean);
+	
+	/**
+	 * Title:统计总计路数
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月1日 下午3:14:01
+	 * @version 1.0
+	 * @return
+	 */
+	public Integer selectCount();
+	
+	/**
+	 * Title:添加一个投票
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月1日 下午6:16:50
+	 * @version 1.0
+	 * @param vote
+	 */
+	public void insertVote(Votes vote);
 }

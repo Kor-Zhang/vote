@@ -1,5 +1,6 @@
 package com.zk.vote.pagebean;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.zk.vote.bean.Users;
@@ -11,20 +12,73 @@ import com.zk.vote.bean.Votes;
  * <p>
  * Description:
  * <p>
+ * 
  * @author Kor_Zhang
  * @date 2017年9月1日 上午11:00:11
  * @version 1.0
  */
 public class PageVotes extends Votes {
 
-	//分页参数
+	// 分页参数
 	private Integer page;
-	
+
 	private Integer pageSize = 5;
+
+	private Integer start;//通过page获取
+
+	private Integer end;//通过page获取
+
+	private Integer maxSize;
 	
-	private Integer start;
+	private Integer maxPage;//通过maxSize获取
 	
-	private Integer end;
+	private List<Votes> votes;
+	
+	private String launcherId;
+	
+	
+
+	
+	
+	public PageVotes() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public PageVotes(String id, String theme, int selectWay, Users launcher,
+			Date time, List<VoteItems> voteItems) {
+		super(id, theme, selectWay, launcher, time, voteItems);
+		// TODO Auto-generated constructor stub
+	}
+	public String getLauncherId() {
+		return launcherId;
+	}
+	public void setLauncherId(String launcherId) {
+		this.launcherId = launcherId;
+	}
+	public Integer getMaxPage() {
+		return maxSize%pageSize>0?((pageSize/pageSize)+1):(pageSize/pageSize);
+	}
+	public void setMaxPage(Integer maxPage) {
+		this.maxPage = maxPage;
+	}
+	
+	
+	public List<Votes> getVotes() {
+		return votes;
+	}
+	public void setVotes(List<Votes> votes) {
+		this.votes = votes;
+	}
+	//***重点****,请勿删除***//
+	public Integer getStart() {
+		return (page - 1) * pageSize + 1;
+	}
+	public Integer getEnd() {
+		return getStart() + pageSize - 1;
+	}
+	public void setEnd(Integer end) {
+		this.end = end;
+	}
 
 	public Integer getPage() {
 		return page;
@@ -42,32 +96,18 @@ public class PageVotes extends Votes {
 		this.pageSize = pageSize;
 	}
 
-	public Integer getStart() {
-		return (page-1)*pageSize+1;
-	}
-
 	public void setStart(Integer start) {
 		this.start = start;
 	}
 
-	public Integer getEnd() {
-		return end;
-	}
-
-	public void setEnd(Integer end) {
-		this.end = getStart() + pageSize-1;
-	}
-
-	public PageVotes() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public PageVotes(String id, String theme, int selectWay, Users launcher,
-			List<VoteItems> voteItems) {
-		super(id, theme, selectWay, launcher, voteItems);
-		// TODO Auto-generated constructor stub
-	}
 	
-	
+
+	public Integer getMaxSize() {
+		return maxSize;
+	}
+
+	public void setMaxSize(Integer maxSize) {
+		this.maxSize = maxSize;
+	}
+
 }
