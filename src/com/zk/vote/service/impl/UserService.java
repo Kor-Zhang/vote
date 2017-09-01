@@ -4,7 +4,7 @@ import com.zk.vote.bean.Users;
 import com.zk.vote.mapper.UsersMapper;
 import com.zk.vote.pagebean.PageUsers;
 import com.zk.vote.service.UsersServiceI;
-import com.zk.vote.tool.Tool;
+import com.zk.vote.util.Util;
 
 /**
  * Title:users的业务实现类
@@ -28,10 +28,18 @@ public class UserService implements UsersServiceI {
 	}
 
 	@Override
-	public boolean login(PageUsers pageBean) throws Exception{
+	public Users login(PageUsers pageBean) throws Exception{
 		Users dbUser = usersMapper.selectUserByName(pageBean.getUsername());
 		
-		return (dbUser !=null && (dbUser.getPassword().equals(pageBean.getPassword()))) ? true : false;
+		return (dbUser !=null && (dbUser.getPassword().equals(pageBean.getPassword()))) ? dbUser : null;
+	}
+
+	@Override
+	public void regist(PageUsers pageBean)  throws Exception{
+		if(null != usersMapper.selectUserByName(pageBean.getUsername())){
+			throw new Exception("该用户名已存在");
+		}
+		usersMapper.insertUser(pageBean);
 	}
 
 	
