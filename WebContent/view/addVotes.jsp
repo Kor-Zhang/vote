@@ -12,27 +12,54 @@
 <div class="addVotesContentDiv">
 	<div class="addVotesTitleDiv">
 		添加新投票
+		<label style="font-size: 14px; color: red;"> ${msg} </label>
 	</div>
 	<div class="addVotesFormDiv">
 		<form class="addVotesForm" action="<c:url value='/votes/votesAction!addVotesAndItems.action'></c:url>">
 			<table>
 				<tr>
 					<td class="tabFirstTd">投票内容:</td>
-					<td class="tabSecondTd"><input type="text" name="theme"/></td>
+					<td class="tabSecondTd"><input type="text" name="theme" value="${theme}" autocomplete="off" disableautocomplete/></td>
 					<td class="tabThirdTd"></td>
 				</tr>
 				<tr>
 					<td class="tabFirstTd">投票類型:</td>
 					
 					<td class="tabSecondTd">
-						<label>
-							<input name="selectWay" checked="checked" type="radio" value="0"/>
-							單選
-						</label>
-						<label>
-							<input name="selectWay" type="radio" value="1"/>
-							多選
-						</label>
+						<c:choose>
+							<c:when test="${selectWay eq 0}">
+								<label>
+									<input name="selectWay" checked="checked" type="radio" value="0"/>
+									單選
+								</label>
+								<label>
+									<input name="selectWay" type="radio" value="1"/>
+									多選
+								</label>
+							</c:when>
+							<c:when test="${selectWay eq 1}">
+									<label>
+										<input name="selectWay" type="radio" value="0"/>
+										單選
+									</label>
+									<label>
+										<input name="selectWay" checked="checked" type="radio" value="1"/>
+										多選
+									</label>
+							</c:when>
+							<c:otherwise>
+								
+								<label>
+									<input name="selectWay" checked="checked" type="radio" value="0"/>
+									單選
+								</label>
+								<label>
+									<input name="selectWay" type="radio" value="1"/>
+									多選
+								</label>
+							</c:otherwise>
+						</c:choose>
+						
 					</td>
 					<td class="tabSecondTd">
 						
@@ -40,7 +67,7 @@
 				</tr>
 				<tr class="voteItemsTr">
 					<td class="tabFirstTd">投票選項:</td>
-					<td class="tabSecondTd"><input type="text" name="vItems"/></td>
+					<td class="tabSecondTd"><input type="text" name="vItems" autocomplete="off" disableautocomplete/></td>
 					<td class="tabThirdTd"></td>
 				</tr>
 				

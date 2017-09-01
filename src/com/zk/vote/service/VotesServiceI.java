@@ -42,4 +42,17 @@ public interface VotesServiceI {
 	 * @throws Exception 
 	 */
 	public void insertVotesAndItems(PageVotes pageBean) throws Exception;
+
+	/**
+	 * Title:查询一个vote及相关信息
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月1日 下午8:49:21
+	 * @version 1.0
+	 * @param id
+	 * @return
+	 */
+	public PageVotes selectVoteById(String id);
 }

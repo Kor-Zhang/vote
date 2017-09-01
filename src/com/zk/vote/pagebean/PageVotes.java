@@ -1,6 +1,7 @@
 package com.zk.vote.pagebean;
 
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
 
 import com.zk.vote.bean.Users;
@@ -35,8 +36,8 @@ public class PageVotes extends Votes {
 	private List<Votes> votes;
 	
 	private String launcherId;
-	
-	private String vItems;
+	//前台的投票选项
+	private String[] vItems;
 
 	
 	
@@ -49,10 +50,10 @@ public class PageVotes extends Votes {
 		super(id, theme, selectWay, launcher, time, voteItems);
 		// TODO Auto-generated constructor stub
 	}
-	public String getvItems() {
+	public String[] getvItems() {
 		return vItems;
 	}
-	public void setvItems(String vItems) {
+	public void setvItems(String[] vItems) {
 		this.vItems = vItems;
 	}
 	
@@ -63,7 +64,7 @@ public class PageVotes extends Votes {
 		this.launcherId = launcherId;
 	}
 	public Integer getMaxPage() {
-		return maxSize%pageSize>0?((pageSize/pageSize)+1):(pageSize/pageSize);
+		return maxSize%pageSize>0?((maxSize/pageSize)+1):(maxSize/pageSize);
 	}
 	public void setMaxPage(Integer maxPage) {
 		this.maxPage = maxPage;
@@ -116,5 +117,13 @@ public class PageVotes extends Votes {
 	public void setMaxSize(Integer maxSize) {
 		this.maxSize = maxSize;
 	}
-
+	@Override
+	public String toString() {
+		return "PageVotes [page=" + page + ", pageSize=" + pageSize
+				+ ", start=" + start + ", end=" + end + ", maxSize=" + maxSize
+				+ ", maxPage=" + maxPage + ", votes=" + votes + ", launcherId="
+				+ launcherId + ", vItems=" + Arrays.toString(vItems)
+				+ ", toString()=" + super.toString() + "]";
+	}
+	
 }

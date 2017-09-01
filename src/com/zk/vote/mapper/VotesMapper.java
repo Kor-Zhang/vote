@@ -51,4 +51,18 @@ public interface VotesMapper {
 	 * @param vote
 	 */
 	public void insertVote(Votes vote);
+	
+	
+	/**
+	 * Title:通过id查询一个vote
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月1日 下午8:46:22
+	 * @version 1.0
+	 * @param id
+	 * @return
+	 */
+	public Votes selectVoteById(String id);
 }

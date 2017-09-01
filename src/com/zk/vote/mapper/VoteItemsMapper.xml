@@ -6,6 +6,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.zk.vote.mapper.VoteItemsMapper">
 
 	<insert id="insertVoteItem" parameterType="VoteItems">
-		insert into voteitems values(#{id},#{master.id},#{description});
+		insert into vote_items values(#{id},#{master.id},#{description})
 	</insert>
+	<!-- 通过投票的id查询投票选项 -->
+	<select id="selectVoteItemsByVoteId" parameterType="string" resultType="VoteItems">
+		select * from vote_items where master=#{value}
+	</select>
 </mapper>

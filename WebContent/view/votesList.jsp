@@ -22,7 +22,7 @@
 				<tr>
 					<td class="firstTd">
 						
-						<a class="vote_icon" href="">
+						<a class="vote_icon" href="<c:url value='/votes/votesAction!selectVoteById.action?id=${v.id}'></c:url>">
 							${v.theme}
 							<!-- 描述 -->
 							<div class="drecDiv">

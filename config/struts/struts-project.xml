@@ -55,6 +55,10 @@
 		<global-results>
 			<result name="msg">/view/msg.jsp</result>
 			<result name="votesList">/view/votesList.jsp</result>
+			<result name="addVotes">/view/addVotes.jsp</result>
+			<result name="addVotes">/view/voteInfo.jsp</result>
+			
+			
 			<result name="rvotesList" type="redirect">/view/votesList.jsp</result>
 		</global-results>
 		<!-- 配置action -->

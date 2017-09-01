@@ -13,6 +13,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		SELECT count(*) from votes
 	</select>
 	<insert id="insertVote" parameterType="Votes">
-		insert into votes values(#{id},#{theme},#{launcher.id},#{selectWay},#{time});
+		insert into votes values(#{id},#{theme},#{launcher.id},#{selectWay},#{time})
 	</insert>
+	
+	<select id="selectVoteById" parameterType="string" resultType="Votes">
+		select * from votes where id=#{value}
+	</select>
 </mapper>

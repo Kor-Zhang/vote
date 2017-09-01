@@ -1,15 +1,18 @@
 package com.zk.vote.service.impl;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
+
 import com.zk.vote.bean.Users;
+import com.zk.vote.bean.VoteItems;
 import com.zk.vote.bean.Votes;
 import com.zk.vote.mapper.VoteItemsMapper;
 import com.zk.vote.mapper.VotesMapper;
 import com.zk.vote.pagebean.PageVotes;
 import com.zk.vote.service.VotesServiceI;
-import com.zk.vote.util.Util;
 
 /**
  * Title:实现VotesServiceI接口
@@ -59,11 +62,16 @@ public class VotesService implements VotesServiceI {
 	@Override
 	public void insertVotesAndItems(PageVotes pageBean) throws Exception {
 		
-		if(pageBean.getTheme() ==null || pageBean.getTheme().equals("")){
-			throw new Exception("主题不能为空");
-		}
+		
 		if(pageBean.getLauncherId() == null || pageBean.getLauncherId().equals("")){
-			throw new Exception("您已离线");
+			throw new IllegalArgumentException("您已离线");
+		}
+		if(pageBean.getTheme() ==null || pageBean.getTheme().equals("")){
+			throw new IllegalArgumentException("主题不能为空");
+		}
+		if(pageBean.getvItems() == null || pageBean.getvItems().length==0 ||pageBean.getvItems()[0].equals("")){
+
+			throw new IllegalArgumentException("至少需要一个选项");
 		}
 		
 		String auncherId = pageBean.getLauncherId();
@@ -81,8 +89,38 @@ public class VotesService implements VotesServiceI {
 		
 		votesMapper.insertVote(vote);
 		
+		//添加选项
+		String[] vItems = pageBean.getvItems();
 		
+		for (int i = 0; i < vItems.length; i++) {
+			String vt = vItems[i];
+			if(null != vt && !vt.equals("")){
+				VoteItems voteItem = new VoteItems(UUID.randomUUID().toString(), vote, vt, null);
+				
+				voteItemsMapper.insertVoteItem(voteItem);
+			}
+			
+			
+		}
 		
+	}
+
+	@Override
+	public PageVotes selectVoteById(String id) {
+		
+		PageVotes vote = new PageVotes();
+		
+		//查询投票
+		Votes dbV = votesMapper.selectVoteById(id);
+		
+		BeanUtils.copyProperties(dbV, vote);
+		
+		//查询选项
+		List<VoteItems> voteItems = voteItemsMapper.selectVoteItemsByVoteId(id);
+		
+		vote.setVoteItems(voteItems);
+		
+		return vote;
 	}
 
 }

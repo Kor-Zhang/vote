@@ -76,21 +76,55 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 	 */
 	public String addVotesAndItems(){
 
-			setRequestAttr("curl","/view/addVotes.jsp");
-			try{
-				//设置launcherid
-				Users u = (Users)getSessionAttr(UsersAction.ONLINE_USER_FIELD);
-				pageBean.setLauncherId(u.getId());
-				
-				votesService.insertVotesAndItems(pageBean);
-
-				setRequestAttr("msg", "添加成功");
-			}catch(Exception e){
-				e.printStackTrace();
-				setRequestAttr("msg", e.getMessage());
+		try{
+			
+			String[] vItems = getRequest().getParameterValues("vItems");
+			
+			pageBean.setvItems(vItems);
+			//设置launcherid
+			Users u = (Users)getSessionAttr(UsersAction.ONLINE_USER_FIELD);
+			
+			if(u == null){
+				throw new Exception("您已离线,请重新登录");
 			}
+			pageBean.setLauncherId(u.getId());
+			
+			votesService.insertVotesAndItems(pageBean);
+
+			setRequestAttr("msg", "添加成功");
+			setRequestAttr("curl","/votes/votesAction!selectVotesByPage.action?page=1");
+			return "msg";
+		}catch(Exception e){
+			e.printStackTrace();
+			setRequestAttr("msg", e.getMessage());
+		}
 		
 		
-		return "msg";
+		return "addVotes";
+	}
+	
+	/**
+	 * Title:查询一个vote
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月1日 下午8:47:41
+	 * @version 1.0
+	 * @return
+	 */
+	public String selectVoteById(){
+
+		try{
+			pageBean = votesService.selectVoteById(pageBean.getId());
+			
+			setRequestAttr("vote", pageBean);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			setRequestAttr("msg", e.getMessage());
+		}
+		
+		return "voteInfo";
 	}
 }
