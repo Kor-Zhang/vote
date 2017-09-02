@@ -21,11 +21,14 @@
 		<div class="detail">
 			<div>
 				<label>
-				已有5人投票，共5個選項
+				<%-- 共${v.itemNum}个选项,${v.joinerNum}人参与,共${v.voteNum}票 --%>
+				已有${vote.itemNum}人投票，共${vote.joinerNum}個選項，共${vote.voteNum}票
 				</label>
+				
 			</div>
 			<table>
-				<c:forEach items="${vote.voteItems}" var="item">
+				<c:forEach items="${vote.pageItems}" var="item">
+					
 					<tr>
 						<td>
 							${item.description}
@@ -36,10 +39,10 @@
 							</div>
 						</td>
 						<td>
-							共 20票(33%)
+							共${item.voteNum}票(33%)
 						</td>
 						<td>
-							<a class="toVoteBtn" href="<c:url value='/userVoteItem/userVoteItemAction!vote.action?itemId=${item.id}'></c:url>">投票</a>
+							<a class="toVoteBtn" href="<c:url value='/userVoteItem/userVoteItemAction!vote.action?itemId=${item.id}&voteId=${vote.id}'></c:url>">投票</a>
 						</td>
 						
 					</tr>

@@ -8,8 +8,12 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<insert id="insertVoteItem" parameterType="VoteItems">
 		insert into vote_items values(#{id},#{master.id},#{description})
 	</insert>
-	<!-- 通过投票的id查询投票选项 -->
-	<select id="selectVoteItemsByVoteId" parameterType="string" resultType="VoteItems">
-		select * from vote_items where master=#{value}
+	<!-- 通过投票的id查询投票选项的基本信息,并且查詢其票数 -->
+	<select id="selectVoteItemsWithCustomField" parameterType="string" resultType="PageVoteItems">
+		SELECT vt.*,nvl(T.voteNum,0) AS voteNum
+		FROM 
+		(SELECT vt.ID AS vtid,nvl(COUNT(uvi.id),0) AS voteNum FROM USER_VOTE_ITEM uvi,VOTE_ITEMS vt WHERE vt.ID = uvi.VOTEITEM(+) AND vt.MASTER =#{value} GROUP BY (vt.ID)) T,
+		VOTE_ITEMS vt
+		WHERE T.vtid= vt.ID
 	</select>
 </mapper>

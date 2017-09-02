@@ -31,7 +31,7 @@
 					</span>
 				</li>
 				<li>
-					<a class="backListIcon" target="viewsIframe" href="<c:url value='/votes/votesAction!selectVotesByPage.action?page=1'></c:url>">返回列表</a>
+					<a class="backListIcon" target="viewsIframe" href="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=1'></c:url>">返回列表</a>
 				</li>
 				<li>
 					<a class="addVoteIcon" target="viewsIframe" href="<c:url value='/view/addVotes.jsp'></c:url>">添加新投票</a>
@@ -49,7 +49,7 @@
 			</ul>
 			<div class="displayOnlineNumber">当前在线人数:${onlineUserNumber}</div>
 			<!-- 显示其他jsp -->
-			<iframe name="viewsIframe" class="viewsIframe" src="<c:url value='/votes/votesAction!selectVotesByPage.action?page=1'></c:url>">
+			<iframe name="viewsIframe" class="viewsIframe" src="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=1'></c:url>">
 					
 			</iframe>
 		</div>

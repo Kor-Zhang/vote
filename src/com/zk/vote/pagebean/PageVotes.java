@@ -39,10 +39,17 @@ public class PageVotes extends Votes {
 	//前台的投票选项
 	private String[] vItems;
 
+	//存放PageVotes
+	private List<PageVotes> pageVotes;
+	
+	
 	//保存投票選項的相關信息
-	private List<PageVoteItems> totalVoteItems;//總的選項
-	private Integer totalItemNumber;//總的選項數量
-	private Integer totalVoteNumber;//所有的選項的所有投票數
+	private List<PageVoteItems> pageItems;
+	private Integer itemNum;//vote選項數目
+	private Integer voteNum;//vote的縂得票數
+	private Integer joinerNum;//vote的參加者數量
+	
+	
 	
 	
 	
@@ -55,24 +62,37 @@ public class PageVotes extends Votes {
 		super(id, theme, selectWay, launcher, time, voteItems);
 		// TODO Auto-generated constructor stub
 	}
-	public Integer getTotalVoteNumber() {
-		return totalVoteNumber;
+	public List<PageVotes> getPageVotes() {
+		return pageVotes;
 	}
-	public void setTotalVoteNumber(Integer totalVoteNumber) {
-		this.totalVoteNumber = totalVoteNumber;
+	public void setPageVotes(List<PageVotes> pageVotes) {
+		this.pageVotes = pageVotes;
 	}
-	public Integer getTotalItemNumber() {
-		return totalItemNumber;
+	public List<PageVoteItems> getPageItems() {
+		return pageItems;
 	}
-	public void setTotalItemNumber(Integer totalItemNumber) {
-		this.totalItemNumber = totalItemNumber;
+	public void setPageItems(List<PageVoteItems> pageItems) {
+		this.pageItems = pageItems;
 	}
-	public List<PageVoteItems> getTotalVoteItems() {
-		return totalVoteItems;
+	public Integer getItemNum() {
+		return itemNum;
 	}
-	public void setTotalVoteItems(List<PageVoteItems> totalVoteItems) {
-		this.totalVoteItems = totalVoteItems;
+	public void setItemNum(Integer itemNum) {
+		this.itemNum = itemNum;
 	}
+	public Integer getVoteNum() {
+		return voteNum;
+	}
+	public void setVoteNum(Integer voteNum) {
+		this.voteNum = voteNum;
+	}
+	public Integer getJoinerNum() {
+		return joinerNum;
+	}
+	public void setJoinerNum(Integer joinerNum) {
+		this.joinerNum = joinerNum;
+	}
+	
 	public String[] getvItems() {
 		return vItems;
 	}
@@ -86,9 +106,7 @@ public class PageVotes extends Votes {
 	public void setLauncherId(String launcherId) {
 		this.launcherId = launcherId;
 	}
-	public Integer getMaxPage() {
-		return maxSize%pageSize>0?((maxSize/pageSize)+1):(maxSize/pageSize);
-	}
+	
 	public void setMaxPage(Integer maxPage) {
 		this.maxPage = maxPage;
 	}
@@ -107,6 +125,11 @@ public class PageVotes extends Votes {
 	public Integer getEnd() {
 		return getStart() + pageSize - 1;
 	}
+	public Integer getMaxPage() {
+		return maxSize%pageSize>0?((maxSize/pageSize)+1):(maxSize/pageSize);
+	}
+
+	//***重点****,请勿删除***//
 	public void setEnd(Integer end) {
 		this.end = end;
 	}
@@ -146,7 +169,11 @@ public class PageVotes extends Votes {
 				+ ", start=" + start + ", end=" + end + ", maxSize=" + maxSize
 				+ ", maxPage=" + maxPage + ", votes=" + votes + ", launcherId="
 				+ launcherId + ", vItems=" + Arrays.toString(vItems)
-				+ ", toString()=" + super.toString() + "]";
+				+ ", pageVotes=" + pageVotes + ", pageItems=" + pageItems
+				+ ", itemNum=" + itemNum + ", voteNum=" + voteNum
+				+ ", joinerNum=" + joinerNum + ", toString()="
+				+ super.toString() + "]";
 	}
+	
 	
 }

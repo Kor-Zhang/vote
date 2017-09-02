@@ -57,7 +57,7 @@ public class UserVoteItemAction extends BaseAction implements
 	 */
 	public String vote() {
 		//设置消息界面返回按钮返回的界面
-		setRequestAttr("curl", "/votes/votesAction!selectVoteById.action?id="+pageBean.getItemId());
+		setRequestAttr("curl", "/votes/votesAction!selectVoteWithCustomField.action?id="+pageBean.getVoteId());
 		try {
 			Users u = getSessionAttr(UsersAction.ONLINE_USER_FIELD);
 			Util.eject(u == null, "您已离线");

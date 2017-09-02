@@ -18,15 +18,19 @@
 	</div>
 	<div class="votesTabDiv">
 		<table>
-			<c:forEach items="${votes.votes}" var="v">
+			<c:forEach items="${votes.pageVotes}" var="v">
 				<tr>
 					<td class="firstTd">
 						
-						<a class="vote_icon" href="<c:url value='/votes/votesAction!selectVoteById.action?id=${v.id}'></c:url>">
+						<a class="vote_icon" href="<c:url value='/votes/votesAction!selectVoteWithCustomField.action?id=${v.id}'></c:url>">
 							${v.theme}
 							<!-- 描述 -->
 							<div class="drecDiv">
-								共12个选项,45人参与
+							
+<!-- 									private Integer itemNum;//vote選項數目
+									private Integer voteNum;//vote的縂得票數
+									private Integer joinerNum;//vote的參加者數量 -->
+								共${v.itemNum}个选项,${v.joinerNum}人参与,共${v.voteNum}票
 							</div>
 						</a>
 						
@@ -42,10 +46,10 @@
 	</div>
 	<div class="pager">
 		<c:if test="${votes.page gt 1}"><!-- 下载已经是最后一页 -->
-			<a href="<c:url value='/votes/votesAction!selectVotesByPage.action?page=${votes.page-1}'></c:url>">上一页</a>
+			<a href="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=${votes.page-1}'></c:url>">上一页</a>
 		</c:if>
 		<c:if test="${votes.page lt votes.maxPage}"><!-- 下载已经是最后一页 -->
-			<a href="<c:url value='/votes/votesAction!selectVotesByPage.action?page=${votes.page+1}'></c:url>">下一页</a>
+			<a href="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=${votes.page+1}'></c:url>">下一页</a>
 		</c:if>
 		[${votes.page}/${votes.maxPage}]
 	</div>

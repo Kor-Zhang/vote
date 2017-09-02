@@ -16,7 +16,7 @@ import com.zk.vote.pagebean.PageVotes;
  */
 public interface VotesMapper {
 	/**
-	 * Title:分页查询votes
+	 * Title:分页查询votes,及其相關信息
 	 * <p>
 	 * Description:
 	 * <p>
@@ -26,7 +26,7 @@ public interface VotesMapper {
 	 * @param pageBean
 	 * @return
 	 */
-	public List<Votes> selectVotesByPage(PageVotes pageBean);
+	public List<PageVotes> selectVoteWithCustomFieldByPage(PageVotes pageBean);
 	
 	/**
 	 * Title:统计总计路数
@@ -54,9 +54,9 @@ public interface VotesMapper {
 	
 	
 	/**
-	 * Title:通过id查询一个vote
+	 * Title:通过id查询一个vote及其相關信息(關聯查詢)
 	 * <p>
-	 * Description:
+	 * Description:信息包括:vote.*,vote的总票数,vote的选项数,vote总共有多少人参加
 	 * <p>
 	 * @author Kor_Zhang
 	 * @date 2017年9月1日 下午8:46:22
@@ -64,5 +64,5 @@ public interface VotesMapper {
 	 * @param id
 	 * @return
 	 */
-	public Votes selectVoteById(String id);
+	public PageVotes selectVoteWithCustomField(String id);
 }

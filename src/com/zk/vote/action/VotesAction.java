@@ -43,7 +43,7 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 	}
 	
 	/**
-	 * Title:分页查找votes
+	 * Title:分页查找votes,及其関信息
 	 * <p>
 	 * Description:
 	 * <p>
@@ -52,10 +52,10 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 	 * @version 1.0
 	 * @return
 	 */
-	public String selectVotesByPage(){
+	public String selectVoteWithCustomFieldByPage(){
 		try{
 			
-			pageBean = votesService.selectVotesByPage(pageBean);
+			pageBean = votesService.selectVoteWithCustomFieldByPage(pageBean);
 			setRequestAttr("votes", pageBean);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -104,19 +104,19 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 	}
 	
 	/**
-	 * Title:查询一个vote
+	 * Title:通过id查询一个vote及其相關信息(關聯查詢)
 	 * <p>
-	 * Description:
+	 * Description:信息包括:vote.*,vote的总票数,vote的选项数,vote总共有多少人参加
 	 * <p>
 	 * @author Kor_Zhang
 	 * @date 2017年9月1日 下午8:47:41
 	 * @version 1.0
 	 * @return
 	 */
-	public String selectVoteById(){
+	public String selectVoteWithCustomField(){
 
 		try{
-			pageBean = votesService.selectVoteById(pageBean.getId());
+			pageBean = votesService.selectVoteWithCustomField(pageBean.getId());
 			
 			setRequestAttr("vote", pageBean);
 			

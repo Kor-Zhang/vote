@@ -4,13 +4,12 @@ import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.BeanUtils;
-
 import com.zk.vote.bean.Users;
 import com.zk.vote.bean.VoteItems;
 import com.zk.vote.bean.Votes;
 import com.zk.vote.mapper.VoteItemsMapper;
 import com.zk.vote.mapper.VotesMapper;
+import com.zk.vote.pagebean.PageVoteItems;
 import com.zk.vote.pagebean.PageVotes;
 import com.zk.vote.service.VotesServiceI;
 
@@ -47,14 +46,16 @@ public class VotesService implements VotesServiceI {
 	}
 
 	@Override
-	public PageVotes selectVotesByPage(PageVotes pageBean) {
+	public PageVotes selectVoteWithCustomFieldByPage(PageVotes pageBean) {
 		//获取并且设置数据库总记录数
 		Integer count = votesMapper.selectCount();
 		
 		pageBean.setMaxSize(count);
 		
-		//获取并且设置返回集合
-		pageBean.setVotes(votesMapper.selectVotesByPage(pageBean));
+		//获取并且设置返回分页的votes集合
+		pageBean.setPageVotes(votesMapper.selectVoteWithCustomFieldByPage(pageBean));
+		
+		
 		
 		return pageBean;
 	}
@@ -106,19 +107,20 @@ public class VotesService implements VotesServiceI {
 	}
 
 	@Override
-	public PageVotes selectVoteById(String id) {
+	public PageVotes selectVoteWithCustomField(String id) {
 		
 		PageVotes vote = new PageVotes();
 		
-		//查询投票
-		Votes dbV = votesMapper.selectVoteById(id);
+		//查询投票的相关心信息
+		vote = votesMapper.selectVoteWithCustomField(id);
 		
-		BeanUtils.copyProperties(dbV, vote);
 		
 		//查询选项
-		List<VoteItems> voteItems = voteItemsMapper.selectVoteItemsByVoteId(id);
+		List<PageVoteItems> pageItems = voteItemsMapper.selectVoteItemsWithCustomField(id);
 		
-		vote.setVoteItems(voteItems);
+		vote.setPageItems(pageItems);
+		
+		
 		
 		return vote;
 	}

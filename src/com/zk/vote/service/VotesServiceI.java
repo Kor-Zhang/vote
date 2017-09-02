@@ -27,7 +27,7 @@ public interface VotesServiceI {
 	 * @param pageBean
 	 * @return
 	 */
-	public PageVotes selectVotesByPage(PageVotes pageBean);
+	public PageVotes selectVoteWithCustomFieldByPage(PageVotes pageBean);
 
 	/**
 	 * Title:添加投票及其选项
@@ -44,9 +44,9 @@ public interface VotesServiceI {
 	public void insertVotesAndItems(PageVotes pageBean) throws Exception;
 
 	/**
-	 * Title:查询一个vote及相关信息
+	 * Title:通过id查询一个vote及其相關信息(關聯查詢)
 	 * <p>
-	 * Description:
+	 * Description:信息包括:vote.*,vote的总票数,vote的选项数,vote总共有多少人参加
 	 * <p>
 	 * @author Kor_Zhang
 	 * @date 2017年9月1日 下午8:49:21
@@ -54,5 +54,5 @@ public interface VotesServiceI {
 	 * @param id
 	 * @return
 	 */
-	public PageVotes selectVoteById(String id);
+	public PageVotes selectVoteWithCustomField(String id);
 }

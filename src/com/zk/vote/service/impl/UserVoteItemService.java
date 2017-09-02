@@ -5,9 +5,11 @@ import java.util.UUID;
 import com.zk.vote.bean.UserVoteItem;
 import com.zk.vote.bean.Users;
 import com.zk.vote.bean.VoteItems;
+import com.zk.vote.bean.Votes;
 import com.zk.vote.mapper.UserVoteItemMapper;
 import com.zk.vote.pagebean.PageUserVoteItem;
 import com.zk.vote.service.UserVoteItemServiceI;
+import com.zk.vote.util.Util;
 
 /**
  * Title:用户和投票的业务接口实现
@@ -47,16 +49,29 @@ public class UserVoteItemService implements UserVoteItemServiceI {
 		if(pageBean.getOnlineUserId() == null){
 			throw new Exception("您已离线");
 		}
+		
+		
 		//设置Users
 		Users u = new Users();
 		u.setId(pageBean.getOnlineUserId());
 		pageBean.setJoiner(u);
 		
-		//设置Votes
+		//设置VoteItems
 		VoteItems vi = new VoteItems();
 		vi.setId(pageBean.getItemId());
 		
 		pageBean.setVoteItem(vi);
+		//设置votes
+		Votes v = new Votes();
+		v.setId(pageBean.getVoteId());
+		
+		pageBean.setVote(v);
+
+		//通过投票id和用户id获取用户的某个投票记录
+		Object o = userVoteItemMapper.selectTheVoteOfUser((UserVoteItem)pageBean);
+		Util.eject(null != o, "您已投过了");
+		
+		
 		//设置id
 		pageBean.setId(UUID.randomUUID().toString());
 		

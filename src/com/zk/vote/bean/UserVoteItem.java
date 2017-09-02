@@ -15,21 +15,7 @@ public class UserVoteItem implements Serializable {
 	private String id;
 	private Users joiner;
 	private VoteItems voteItem;
-	@Override
-	public String toString() {
-		return "UserVoteItem [id=" + id + ", joiner=" + joiner + ", voteItem="
-				+ voteItem + "]";
-	}
-	public UserVoteItem() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public UserVoteItem(String id, Users joiner, VoteItems voteItem) {
-		super();
-		this.id = id;
-		this.joiner = joiner;
-		this.voteItem = voteItem;
-	}
+	private Votes vote;
 	public String getId() {
 		return id;
 	}
@@ -48,5 +34,28 @@ public class UserVoteItem implements Serializable {
 	public void setVoteItem(VoteItems voteItem) {
 		this.voteItem = voteItem;
 	}
+	public Votes getVote() {
+		return vote;
+	}
+	public void setVote(Votes vote) {
+		this.vote = vote;
+	}
+	public UserVoteItem() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public UserVoteItem(String id, Users joiner, VoteItems voteItem, Votes vote) {
+		super();
+		this.id = id;
+		this.joiner = joiner;
+		this.voteItem = voteItem;
+		this.vote = vote;
+	}
+	@Override
+	public String toString() {
+		return "UserVoteItem [id=" + id + ", joiner=" + joiner + ", voteItem="
+				+ voteItem + ", vote=" + vote + "]";
+	}
+	
 	
 }

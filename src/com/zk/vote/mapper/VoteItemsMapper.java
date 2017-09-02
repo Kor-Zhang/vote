@@ -3,6 +3,7 @@ package com.zk.vote.mapper;
 import java.util.List;
 
 import com.zk.vote.bean.VoteItems;
+import com.zk.vote.pagebean.PageVoteItems;
 
 /**
  * Title:voteitems的mapper接口
@@ -27,7 +28,7 @@ public interface VoteItemsMapper {
 	public void insertVoteItem(VoteItems voteItem);
 	
 	/**
-	 * Title:通过投票的id查询投票选项
+	 * Title:通过投票的id查询投票选项的基本信息,并且查詢其票数
 	 * <p>
 	 * Description:
 	 * <p>
@@ -37,5 +38,5 @@ public interface VoteItemsMapper {
 	 * @param id
 	 * @return
 	 */
-	public List<VoteItems> selectVoteItemsByVoteId(String id);
+	public List<PageVoteItems> selectVoteItemsWithCustomField(String id);
 }

@@ -27,4 +27,17 @@ public interface UserVoteItemMapper {
 	 */
 	void insertOne(UserVoteItem uvi);
 
+	/**
+	 * Title:通过投票id和用户id获取用户的某个投票记录
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月2日 上午10:23:24
+	 * @version 1.0
+	 * @param pageBean
+	 * @return
+	 */
+	UserVoteItem selectTheVoteOfUser(UserVoteItem uvi);
+
 }

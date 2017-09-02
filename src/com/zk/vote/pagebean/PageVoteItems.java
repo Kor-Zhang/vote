@@ -17,14 +17,14 @@ import com.zk.vote.bean.Votes;
  * @version 1.0
  */
 public class PageVoteItems extends VoteItems {
-	private Integer totalJoinerNumber;// 該選項參與者個數
+	private Integer voteNum;// 该选项的票数個數
 
-	public Integer getTotalJoinerNumber() {
-		return totalJoinerNumber;
+	public Integer getVoteNum() {
+		return voteNum;
 	}
 
-	public void setTotalJoinerNumber(Integer totalJoinerNumber) {
-		this.totalJoinerNumber = totalJoinerNumber;
+	public void setVoteNum(Integer voteNum) {
+		this.voteNum = voteNum;
 	}
 
 	public PageVoteItems() {
@@ -40,12 +40,9 @@ public class PageVoteItems extends VoteItems {
 
 	@Override
 	public String toString() {
-		return "PageVoteItems [totalJoinerNumber=" + totalJoinerNumber
-				+ ", toString()=" + super.toString() + ", getId()=" + getId()
-				+ ", getMaster()=" + getMaster() + ", getDescription()="
-				+ getDescription() + ", getUserVoteItems()="
-				+ getUserVoteItems() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+		return "PageVoteItems [voteNum=" + voteNum + ", toString()="
+				+ super.toString() + "]";
 	}
+
 
 }

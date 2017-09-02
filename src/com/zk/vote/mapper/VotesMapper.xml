@@ -6,17 +6,38 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.zk.vote.mapper.VotesMapper">
 
 
-	<select id="selectVotesByPage" parameterType="PageVotes" resultType="Votes">
-		SELECT * FROM (SELECT t.*,ROWNUM r FROM votes t WHERE ROWNUM&lt;=#{end} ORDER BY t.TIME) tt WHERE tt.r &gt;= #{start}
-	</select>
+	
 	<select id="selectCount" resultType="int">
 		SELECT count(*) from votes
 	</select>
 	<insert id="insertVote" parameterType="Votes">
 		insert into votes values(#{id},#{theme},#{launcher.id},#{selectWay},#{time})
 	</insert>
+	<!-- 
+		Title:通过id查询一个vote及其相關信息(關聯查詢)
+		Description:信息包括:vote.*,vote的总票数,vote的选项数,vote总共有多少人参加
+	 -->
+	<select id="selectVoteWithCustomField" parameterType="string" resultType="PageVotes">
 	
-	<select id="selectVoteById" parameterType="string" resultType="Votes">
-		select * from votes where id=#{value}
+		<!-- 	private Integer itemNum;//vote選項數目
+			private Integer voteNum;//vote的縂得票數
+			private Integer joinerNum;//vote的參加者數量 -->
+		SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum
+		FROM VOTES V,
+		( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
+		( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER = V.ID  GROUP BY (V.ID) ) INU,
+		(SELECT UVI.VOTE AS VOTEID,COUNT(UVI.JOINER) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
+		WHERE V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND V.ID=#{id}
 	</select>
+	<select id="selectVoteWithCustomFieldByPage" parameterType="PageVotes" resultType="PageVotes">
+		SELECT * FROM (
+		  SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,ROWNUM AS rown
+		  FROM VOTES V,
+		  ( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
+		  ( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER = V.ID GROUP BY (V.ID) ) INU,
+		  (SELECT UVI.VOTE AS VOTEID,COUNT(UVI.JOINER) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
+		  WHERE V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND ROWNUM &lt;=#{end} ORDER BY v.TIME) t
+		WHERE t.rown &gt;= #{start}
+	</select>
+	
 </mapper>
