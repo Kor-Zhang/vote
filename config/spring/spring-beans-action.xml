@@ -22,4 +22,15 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		<property name="pageBean" ref="pageVotes"></property>
 		<property name="votesService" ref="votesService"></property>
 	</bean>
+	<!-- 配置VoteItemsAction -->
+	<bean id="voteItemsAction" class="com.zk.vote.action.VoteItemsAction">
+		<property name="pageBean" ref="pageVoteItems"></property>
+		<property name="voteItemsService" ref="voteItemsService"></property>
+	</bean>
+	
+	<!-- 配置VoteItemsAction -->
+	<bean id="userVoteItemAction" class="com.zk.vote.action.UserVoteItemAction">
+		<property name="pageBean" ref="pageUserVoteItem"></property>
+		<property name="userVoteItemService" ref="userVoteItemService"></property>
+	</bean>
 </beans>

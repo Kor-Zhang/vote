@@ -16,4 +16,12 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		<property name="votesMapper" ref="votesMapper"></property>
 		<property name="voteItemsMapper" ref="voteItemsMapper"></property>
 	</bean>
+	<!-- 配置 voteItemsService -->
+	<bean id="voteItemsService" class="com.zk.vote.service.impl.VoteItemsService">
+		<property name="voteItemsMapper" ref="voteItemsMapper"></property>
+	</bean>
+		<!-- 配置userVoteItemService -->
+	<bean id="userVoteItemService" class="com.zk.vote.service.impl.UserVoteItemService">
+		<property name="userVoteItemMapper" ref="userVoteItemMapper"></property>
+	</bean>
 </beans>

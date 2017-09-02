@@ -56,7 +56,7 @@
 			<result name="msg">/view/msg.jsp</result>
 			<result name="votesList">/view/votesList.jsp</result>
 			<result name="addVotes">/view/addVotes.jsp</result>
-			<result name="addVotes">/view/voteInfo.jsp</result>
+			<result name="voteInfo">/view/voteInfo.jsp</result>
 			
 			
 			<result name="rvotesList" type="redirect">/view/votesList.jsp</result>
@@ -66,7 +66,44 @@
 		<!-- 配置votesAction -->
 		<!-- 利用了spring的bean作为class -->
 		<action name="votesAction" class="votesAction">
+		</action>
+	</package>
+	<!-- voteItems模块的package -->
+	<package name="voteItems-package" namespace="/voteItems" extends="base-package">
+		<!-- 全局的result -->
+		<global-results>
+			<result name="msg">/view/msg.jsp</result>
+			<result name="votesList">/view/votesList.jsp</result>
+			<result name="addVotes">/view/addVotes.jsp</result>
+			<result name="voteInfo">/view/voteInfo.jsp</result>
 			
+			
+			<result name="rvotesList" type="redirect">/view/votesList.jsp</result>
+		</global-results>
+		<!-- 配置action -->
+		
+		<!-- 配置voteItemsAction -->
+		<!-- 利用了spring的bean作为class -->
+		<action name="voteItemsAction" class="voteItemsAction">
+		</action>
+	</package>
+	<!-- userVoteItem模块的package -->
+	<package name="userVoteItem-package" namespace="/userVoteItem" extends="base-package">
+		<!-- 全局的result -->
+		<global-results>
+			<result name="msg">/view/msg.jsp</result>
+			<result name="votesList">/view/votesList.jsp</result>
+			<result name="addVotes">/view/addVotes.jsp</result>
+			<result name="voteInfo">/view/voteInfo.jsp</result>
+			
+			
+			<result name="rvotesList" type="redirect">/view/votesList.jsp</result>
+		</global-results>
+		<!-- 配置action -->
+		
+		<!-- 配置userVoteItemAction -->
+		<!-- 利用了spring的bean作为class -->
+		<action name="userVoteItemAction" class="userVoteItemAction">
 		</action>
 	</package>
 </struts>

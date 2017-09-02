@@ -13,4 +13,12 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	<!-- Votes -->
 	<bean id="votes" class="com.zk.vote.bean.Votes">
 	</bean>
+	<!-- VoteItems -->
+	<bean id="voteItems" class="com.zk.vote.bean.VoteItems">
+	</bean>
+	
+	<!-- UserVoteItem -->
+	<bean id="userVoteItem" class="com.zk.vote.bean.UserVoteItem">
+	</bean>
 </beans>
+

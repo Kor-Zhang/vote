@@ -39,6 +39,11 @@ public class PageVotes extends Votes {
 	//前台的投票选项
 	private String[] vItems;
 
+	//保存投票選項的相關信息
+	private List<PageVoteItems> totalVoteItems;//總的選項
+	private Integer totalItemNumber;//總的選項數量
+	private Integer totalVoteNumber;//所有的選項的所有投票數
+	
 	
 	
 	public PageVotes() {
@@ -49,6 +54,24 @@ public class PageVotes extends Votes {
 			Date time, List<VoteItems> voteItems) {
 		super(id, theme, selectWay, launcher, time, voteItems);
 		// TODO Auto-generated constructor stub
+	}
+	public Integer getTotalVoteNumber() {
+		return totalVoteNumber;
+	}
+	public void setTotalVoteNumber(Integer totalVoteNumber) {
+		this.totalVoteNumber = totalVoteNumber;
+	}
+	public Integer getTotalItemNumber() {
+		return totalItemNumber;
+	}
+	public void setTotalItemNumber(Integer totalItemNumber) {
+		this.totalItemNumber = totalItemNumber;
+	}
+	public List<PageVoteItems> getTotalVoteItems() {
+		return totalVoteItems;
+	}
+	public void setTotalVoteItems(List<PageVoteItems> totalVoteItems) {
+		this.totalVoteItems = totalVoteItems;
 	}
 	public String[] getvItems() {
 		return vItems;

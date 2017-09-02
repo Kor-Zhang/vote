@@ -12,32 +12,41 @@ import java.io.Serializable;
  * @version 1.0
  */
 public class UserVoteItem implements Serializable {
-	private Users user;
+	private String id;
+	private Users joiner;
 	private VoteItems voteItem;
+	@Override
+	public String toString() {
+		return "UserVoteItem [id=" + id + ", joiner=" + joiner + ", voteItem="
+				+ voteItem + "]";
+	}
 	public UserVoteItem() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserVoteItem(Users user, VoteItems voteItem) {
+	public UserVoteItem(String id, Users joiner, VoteItems voteItem) {
 		super();
-		this.user = user;
+		this.id = id;
+		this.joiner = joiner;
 		this.voteItem = voteItem;
 	}
-	public Users getUser() {
-		return user;
+	public String getId() {
+		return id;
 	}
-	public void setUser(Users user) {
-		this.user = user;
+	public void setId(String id) {
+		this.id = id;
+	}
+	public Users getJoiner() {
+		return joiner;
+	}
+	public void setJoiner(Users joiner) {
+		this.joiner = joiner;
 	}
 	public VoteItems getVoteItem() {
 		return voteItem;
 	}
 	public void setVoteItem(VoteItems voteItem) {
 		this.voteItem = voteItem;
-	}
-	@Override
-	public String toString() {
-		return "UserVoteItem [user=" + user + ", voteItem=" + voteItem + "]";
 	}
 	
 }
