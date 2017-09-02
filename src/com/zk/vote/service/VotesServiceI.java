@@ -1,8 +1,5 @@
 package com.zk.vote.service;
 
-import java.util.List;
-
-import com.zk.vote.bean.Votes;
 import com.zk.vote.pagebean.PageVotes;
 
 /**
@@ -27,7 +24,7 @@ public interface VotesServiceI {
 	 * @param pageBean
 	 * @return
 	 */
-	public PageVotes selectVoteWithCustomFieldByPage(PageVotes pageBean);
+	public PageVotes selectVoteWithCustomFieldByPageAndKW(PageVotes pageBean);
 
 	/**
 	 * Title:添加投票及其选项
@@ -55,4 +52,5 @@ public interface VotesServiceI {
 	 * @return
 	 */
 	public PageVotes selectVoteWithCustomField(String id);
+
 }

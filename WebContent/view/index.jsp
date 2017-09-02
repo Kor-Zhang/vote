@@ -31,7 +31,7 @@
 					</span>
 				</li>
 				<li>
-					<a class="backListIcon" target="viewsIframe" href="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=1'></c:url>">投票大厅</a>
+					<a class="backListIcon" target="viewsIframe" href="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPageAndKW.action?page=1&kw='></c:url>">投票大厅</a>
 				</li>
 				<li>
 					<a class="addVoteIcon" target="viewsIframe" href="<c:url value='/view/addVotes.jsp'></c:url>">添加新投票</a>
@@ -40,8 +40,8 @@
 					<a class="repairIcon" target="viewsIframe" href="">我发起的..</a>
 				</li>
 				<li>
-					<form class="searchForm" action="" target="viewsIframe">
-						<input name="kw" placeholder="请输入投票关键字"/>
+					<form method="post" class="searchForm" action="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPageAndKW.action?page=1'></c:url>" target="viewsIframe">
+						<input name="kw" placeholder="请输入投票关键字" autoComplete="off" disableAutoComplete="true"/>
 						<input type="submit" value="搜索"/>
 						
 					</form>
@@ -49,7 +49,7 @@
 			</ul>
 			<div class="displayOnlineNumber">当前在线人数:${onlineUserNumber}</div>
 			<!-- 显示其他jsp -->
-			<iframe name="viewsIframe" class="viewsIframe" src="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=1'></c:url>">
+			<iframe name="viewsIframe" class="viewsIframe" src="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPageAndKW.action?page=1&kw='></c:url>">
 					
 			</iframe>
 		</div>

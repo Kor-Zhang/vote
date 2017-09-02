@@ -26,10 +26,9 @@ public interface VotesMapper {
 	 * @param pageBean
 	 * @return
 	 */
-	public List<PageVotes> selectVoteWithCustomFieldByPage(PageVotes pageBean);
-	
+	public List<PageVotes> selectVoteWithCustomFieldByPageAndKW(PageVotes pageBean);
 	/**
-	 * Title:统计总计路数
+	 * Title:统计指定theme的关键字的总计路数
 	 * <p>
 	 * Description:
 	 * <p>
@@ -38,7 +37,7 @@ public interface VotesMapper {
 	 * @version 1.0
 	 * @return
 	 */
-	public Integer selectCount();
+	public Integer selectCountByKW(String kw);
 	
 	/**
 	 * Title:添加一个投票
@@ -65,4 +64,7 @@ public interface VotesMapper {
 	 * @return
 	 */
 	public PageVotes selectVoteWithCustomField(String id);
+	
+	
+	
 }

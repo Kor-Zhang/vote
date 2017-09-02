@@ -1,6 +1,5 @@
 package com.zk.vote.service.impl;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
@@ -47,16 +46,14 @@ public class VotesService implements VotesServiceI {
 	}
 
 	@Override
-	public PageVotes selectVoteWithCustomFieldByPage(PageVotes pageBean) {
-		//获取并且设置数据库总记录数
-		Integer count = votesMapper.selectCount();
+	public PageVotes selectVoteWithCustomFieldByPageAndKW(PageVotes pageBean) {
+		//获取并且设置theme关键字的数据库总记录数
+		Integer count = votesMapper.selectCountByKW(pageBean.getKw());
 		
 		pageBean.setMaxSize(count);
 		
-		//获取并且设置返回分页的votes集合
-		pageBean.setPageVotes(votesMapper.selectVoteWithCustomFieldByPage(pageBean));
-		
-		
+		//获取并且设置返回指定theme关键字的分页的votes集合
+		pageBean.setPageVotes(votesMapper.selectVoteWithCustomFieldByPageAndKW(pageBean));
 		
 		return pageBean;
 	}
@@ -125,5 +122,6 @@ public class VotesService implements VotesServiceI {
 		
 		return vote;
 	}
+
 
 }

@@ -53,6 +53,9 @@ public class PageVotes extends Votes {
 	
 	
 	
+	//关键字搜索
+	private String kw;
+	
 	
 	
 	public PageVotes() {
@@ -64,6 +67,13 @@ public class PageVotes extends Votes {
 		super(id, theme, selectWay, launcher, time, voteItems);
 		// TODO Auto-generated constructor stub
 	}
+	public String getKw() {
+		return kw;
+	}
+	public void setKw(String kw) {
+		this.kw = kw;
+	}
+	
 	public List<PageVotes> getPageVotes() {
 		return pageVotes;
 	}

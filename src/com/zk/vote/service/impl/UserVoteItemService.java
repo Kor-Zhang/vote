@@ -63,15 +63,15 @@ public class UserVoteItemService implements UserVoteItemServiceI {
 		
 		pageBean.setVote(v);
 
-		//通过投票id和用户id获取用户的某个投票记录
-		Object o = userVoteItemMapper.selectTheVoteOfUser((UserVoteItem)pageBean);
-		Util.eject(null != o, "您已投过了");
-		
 		//检测用户是否选择了投票选项
 		String[] toVoteItemIds = pageBean.getToVoteItemIds();
 		Util.eject(toVoteItemIds==null||
 				toVoteItemIds.length==0, 
 				"请先选择想投的选项");
+
+		//通过投票id和用户id获取用户的某个投票记录
+		Object o = userVoteItemMapper.selectTheVoteOfUser((UserVoteItem)pageBean);
+		Util.eject(null != o, "您已投过了");
 		
 		//循环写入用户选的选项们(单选或多选)
 		VoteItems vi = new VoteItems();

@@ -43,7 +43,7 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 	}
 	
 	/**
-	 * Title:分页查找votes,及其関信息
+	 * Title:分页按theme关键字查找votes,及其関信息
 	 * <p>
 	 * Description:
 	 * <p>
@@ -52,10 +52,10 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 	 * @version 1.0
 	 * @return
 	 */
-	public String selectVoteWithCustomFieldByPage(){
+	public String selectVoteWithCustomFieldByPageAndKW(){
 		try{
 			
-			pageBean = votesService.selectVoteWithCustomFieldByPage(pageBean);
+			pageBean = votesService.selectVoteWithCustomFieldByPageAndKW(pageBean);
 			setRequestAttr("votes", pageBean);
 		}catch(Exception e){
 			e.printStackTrace();

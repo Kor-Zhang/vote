@@ -7,8 +7,14 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 	
-	<select id="selectCount" resultType="int">
+	<select id="selectCountByKW" resultType="int" parameterType="string">
 		SELECT count(*) from votes
+		<where>
+			<if test="value!=null and !&quot;&quot;.equals(value)">
+				 theme like '%${value}%'
+			</if>
+			
+		</where>
 	</select>
 	<insert id="insertVote" parameterType="Votes">
 		insert into votes values(#{id},#{theme},#{launcher.id},#{selectWay},#{time})
@@ -62,13 +68,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	
 	
 	
-	
-	
-	
-	
-	
-	<!-- 分页查询votes及其其他信息 -->
-	<select id="selectVoteWithCustomFieldByPage" parameterType="PageVotes" resultMap="PageVotesResultMap">
+	<sql id="selectVotes">
 	
 		SELECT * FROM (
 		  SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,u.ID AS userid ,u.USERNAME AS username ,u.PASSWORD AS PASSOWRD,ROWNUM AS rown
@@ -78,7 +78,18 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		  ( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER= V.ID GROUP BY (V.ID) ) INU,
 		  (SELECT UVI.VOTE AS VOTEID,COUNT(DISTINCT(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
 		  WHERE v.LAUNCHER = u.ID AND V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND ROWNUM &lt;=#{end} ORDER BY v.TIME DESC) t
-		WHERE t.rown &gt;= #{start}
+		WHERE t.rown &gt;= #{start} and T.theme like '%${kw}%'
+	</sql>
+	
+	
+	
+	
+	<!-- 分页按theme的关键字查询votes及其其他信息 -->
+	<select id="selectVoteWithCustomFieldByPageAndKW" parameterType="PageVotes" resultMap="PageVotesResultMap">
+		<include refid="selectVotes"/>
+		<!-- <if test="kw != null and !&quot;&quot;.equals(kw.trim())">
+			and V.theme like '%${kw}%'
+		</if>	 -->
 	</select>
 	
 </mapper>
