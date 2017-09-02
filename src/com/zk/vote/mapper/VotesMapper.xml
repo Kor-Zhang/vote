@@ -29,6 +29,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		(SELECT UVI.VOTE AS VOTEID,COUNT(UVI.JOINER) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
 		WHERE V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND V.ID=#{id}
 	</select>
+	<!-- 分页查询votes及其其他信息 -->
 	<select id="selectVoteWithCustomFieldByPage" parameterType="PageVotes" resultType="PageVotes">
 		SELECT * FROM (
 		  SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,ROWNUM AS rown
@@ -36,7 +37,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		  ( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
 		  ( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER = V.ID GROUP BY (V.ID) ) INU,
 		  (SELECT UVI.VOTE AS VOTEID,COUNT(UVI.JOINER) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
-		  WHERE V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND ROWNUM &lt;=#{end} ORDER BY v.TIME) t
+		  WHERE V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND ROWNUM &lt;=#{end} ORDER BY v.TIME desc) t
 		WHERE t.rown &gt;= #{start}
 	</select>
 	

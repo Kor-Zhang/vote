@@ -1,6 +1,7 @@
 package com.zk.vote.pagebean;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,12 +54,13 @@ public class PageVotes extends Votes {
 	
 	
 	
+	
 	public PageVotes() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public PageVotes(String id, String theme, int selectWay, Users launcher,
-			Date time, List<VoteItems> voteItems) {
+			Timestamp time, List<VoteItems> voteItems) {
 		super(id, theme, selectWay, launcher, time, voteItems);
 		// TODO Auto-generated constructor stub
 	}

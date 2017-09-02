@@ -92,7 +92,7 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 			votesService.insertVotesAndItems(pageBean);
 
 			setRequestAttr("msg", "添加成功");
-			setRequestAttr("curl","/votes/votesAction!selectVotesByPage.action?page=1");
+			setRequestAttr("curl","/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=1");
 			return "msg";
 		}catch(Exception e){
 			e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.zk.vote.service.impl;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -86,7 +87,7 @@ public class VotesService implements VotesServiceI {
 		
 		vote.setId(UUID.randomUUID().toString());
 		
-		vote.setTime(new Date(new java.util.Date().getTime()));
+		vote.setTime(new Timestamp(new java.util.Date().getTime()));
 		
 		votesMapper.insertVote(vote);
 		

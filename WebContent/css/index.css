@@ -43,10 +43,7 @@
 	border-bottom-right-radius:3px;
 	border-left:0px;
 }
-.navbar a {
-	color: rgb(11, 158, 255);
-	text-decoration: none;
-}
+
 
 .backListIcon {
 	width: 5px;
@@ -87,7 +84,7 @@
 	border:0px solid rgba(0,0,0,0);
 	width:100%;
 	/* background: red; */
-	height: 500px;
+	height: 700px;
 }
 .displayOnlineNumber{
 	height:20px;

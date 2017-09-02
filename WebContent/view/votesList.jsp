@@ -36,7 +36,7 @@
 						
 					</td>
 					<td class="secondTd">
-						<a class="join_icon" href="">我要参与</a>
+						<a class="join_icon" href="<c:url value='/votes/votesAction!selectVoteWithCustomField.action?id=${v.id}'></c:url>">我要参与</a>
 					</td>
 				</tr>
 			</c:forEach>
