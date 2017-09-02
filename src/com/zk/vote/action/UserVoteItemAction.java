@@ -64,6 +64,9 @@ public class UserVoteItemAction extends BaseAction implements
 			//获取在线用户
 			pageBean.setOnlineUserId(u.getId());
 			
+			//获取用户选择的选项的ids
+			pageBean.setToVoteItemIds(getRequest().getParameterValues("toVoteItemIds"));
+			
 			userVoteItemService.vote(pageBean);
 			setRequestAttr("msg", "投票成功");
 		} catch (Exception e) {

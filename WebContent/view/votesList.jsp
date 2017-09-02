@@ -30,7 +30,15 @@
 <!-- 									private Integer itemNum;//vote選項數目
 									private Integer voteNum;//vote的縂得票數
 									private Integer joinerNum;//vote的參加者數量 -->
-								共${v.itemNum}个选项,${v.joinerNum}人参与,共${v.voteNum}票
+								共${v.itemNum}个选项,${v.joinerNum}人参与,共${v.voteNum}票,
+								<!-- 多选 -->
+								<c:if test="${v.selectWay eq 1}">
+									多选
+								</c:if>
+								<!-- 单选 -->
+								<c:if test="${v.selectWay eq 0}">
+									单选
+								</c:if>
 							</div>
 						</a>
 						

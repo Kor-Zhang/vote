@@ -22,6 +22,19 @@ public class PageUserVoteItem extends UserVoteItem{
 
 	private String voteId;
 	
+	
+	/*接收用户选择投票的id*/
+	private String[] toVoteItemIds;
+	
+	
+	public String[] getToVoteItemIds() {
+		return toVoteItemIds;
+	}
+
+	public void setToVoteItemIds(String[] toVoteItemIds) {
+		this.toVoteItemIds = toVoteItemIds;
+	}
+
 	public String getVoteId() {
 		return voteId;
 	}
@@ -58,7 +71,6 @@ public class PageUserVoteItem extends UserVoteItem{
 	}
 
 	
-
 
 	
 	

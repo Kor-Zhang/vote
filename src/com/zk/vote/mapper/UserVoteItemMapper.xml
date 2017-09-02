@@ -15,6 +15,6 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		SELECT uvi.* 
 		from votes v,USER_VOTE_ITEM uvi 
 		WHERE v.ID = uvi.VOTE AND
-		uvi.JOINER = #{joiner.id} AND v.id=#{vote.id}
+		uvi.JOINER = #{joiner.id} AND v.id=#{vote.id} AND ROWNUM &lt;=1
 	</select>
 </mapper>

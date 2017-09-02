@@ -1,9 +1,9 @@
-.voteInfoContentDiv .titleDiv{
-	
+.voteInfoContentDiv .titleDiv {
 	width: 100%;
 	height: 50px;
 	line-height: 50px;
 }
+
 .titleDiv>* {
 	height: 50px;
 	line-height: 50px;
@@ -15,55 +15,51 @@
 	font-weight: bold;
 }
 
-
-.displayVoteInfo{
+.displayVoteInfo {
 	border-top: 1px solid gray;
 	padding: 20px;
 }
-.theme label{
-	padding-left:15px;
+
+.theme label {
+	padding-left: 15px;
 	background-image: url("../img/vote_icon.gif");
 	background-repeat: no-repeat;
 	font-weight: bold;
 	font-size: 16px;
 }
-.detail table{
+
+.detail table {
 	margin: 20px 0px;
 }
 
-
 .detail table {
 	width: 100%;
-	border-bottom: 1px solid rgb(240,240,240);
-	
+	border-bottom: 1px solid rgb(240, 240, 240);
 	/* border-right: 1px solid #804040; */
 	/* 取消td间隙 */
 	border-collapse: collapse;
-	
-	
 }
 
 .detail table td {
 	/* border-left: 1px solid #804040; */
-	border-top: 1px solid rgb(240,240,240);
-	height:60px;
-	padding:0px 20px;
-	
-	
+	border-top: 1px solid rgb(240, 240, 240);
+	height: 60px;
+	padding: 0px 20px;
+}
+.middleTd{
+	width:50%;
 }
 /* 选择奇数行 */
-.detail table tr:nth-child(odd) td{
-	background: rgb(249,249,249);
+.detail table tr:nth-child(odd) td {
+	background: rgb(249, 249, 249);
 }
 
-
-
-.toVoteBtn{
-	padding-left:18px;
-	background-image: url("../img/join.gif");
-	background-repeat: no-repeat;
-	
+.toVoteBtn {
+	width: 60px;
+	height: 35px;
+	line-height:20px;
+	padding: 5px;
+	border: 1px solid rgb(200, 200, 200);
+	border-radius: 5px;
+	cursor: pointer;
 }
-
-
-

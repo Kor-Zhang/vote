@@ -56,11 +56,7 @@ public class UserVoteItemService implements UserVoteItemServiceI {
 		u.setId(pageBean.getOnlineUserId());
 		pageBean.setJoiner(u);
 		
-		//设置VoteItems
-		VoteItems vi = new VoteItems();
-		vi.setId(pageBean.getItemId());
-		
-		pageBean.setVoteItem(vi);
+	
 		//设置votes
 		Votes v = new Votes();
 		v.setId(pageBean.getVoteId());
@@ -71,14 +67,30 @@ public class UserVoteItemService implements UserVoteItemServiceI {
 		Object o = userVoteItemMapper.selectTheVoteOfUser((UserVoteItem)pageBean);
 		Util.eject(null != o, "您已投过了");
 		
+		//检测用户是否选择了投票选项
+		String[] toVoteItemIds = pageBean.getToVoteItemIds();
+		Util.eject(toVoteItemIds==null||
+				toVoteItemIds.length==0, 
+				"请先选择想投的选项");
 		
-		//设置id
-		pageBean.setId(UUID.randomUUID().toString());
+		//循环写入用户选的选项们(单选或多选)
+		VoteItems vi = new VoteItems();
+		for (int i = 0; i < toVoteItemIds.length; i++) {
+			String itemId = toVoteItemIds[i];
+			if(itemId != null && !itemId.equals("")){
+				vi.setId(itemId);
+				pageBean.setVoteItem(vi);
+				//设置id
+				pageBean.setId(UUID.randomUUID().toString());
+				//插入一条用户选择投票选项的数据
+				userVoteItemMapper.insertOne((UserVoteItem)pageBean);
+			}
+		}
 		
 		
-		//VoteItems vi = new VoteItems(UUID.randomUUID().toString(), master, pageBean.getDescription(), userVoteItems)
-		//插入数据
-		userVoteItemMapper.insertOne((UserVoteItem)pageBean);
+		
+		
+		
 	}
 
 
