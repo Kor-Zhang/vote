@@ -31,13 +31,13 @@
 					</span>
 				</li>
 				<li>
-					<a class="backListIcon" target="viewsIframe" href="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=1'></c:url>">返回列表</a>
+					<a class="backListIcon" target="viewsIframe" href="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=1'></c:url>">投票大厅</a>
 				</li>
 				<li>
 					<a class="addVoteIcon" target="viewsIframe" href="<c:url value='/view/addVotes.jsp'></c:url>">添加新投票</a>
 				</li>
 				<li>
-					<a class="repairIcon" target="viewsIframe" href="">维护</a>
+					<a class="repairIcon" target="viewsIframe" href="">我发起的..</a>
 				</li>
 				<li>
 					<form class="searchForm" action="" target="viewsIframe">

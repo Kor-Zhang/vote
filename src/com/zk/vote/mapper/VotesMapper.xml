@@ -20,13 +20,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 	<resultMap type="PageVotes" id="PageVotesResultMap">
-		<!-- user的表字段与bean字段对应关系 -->
-		<!-- user的主键 -->
+		<!-- PageVotes的表字段与bean字段对应关系 -->
+		<!-- PageVotes的主键 -->
 		<id column="id" property="id" />
-		<result column="username" property="username" />
-		<association property="person" javaType="com.kerwin.mybatis.pojo.Person">
-			<id column="p_id" property="id" />
-			<result column="name" property="name" />
+		<result column="id" property="id" />
+		<result column="theme" property="theme" />
+		<result column="selectWay" property="selectWay" />
+		<result column="votenum" property="voteNum" />
+		<result column="itemnum" property="itemNum" />
+		<result column="joinernum" property="joinerNum" />
+		<association property="launcher" javaType="Users">
+			<id column="userid" property="id" />
+			<result column="username" property="username" />
+			<result column="password" property="password" />
 		</association>
 	</resultMap>  
 	
@@ -34,17 +40,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		Title:通过id查询一个vote及其相關信息(關聯查詢)
 		Description:信息包括:vote.*,vote的总票数,vote的选项数,vote总共有多少人参加
 	 -->
-	<select id="selectVoteWithCustomField" parameterType="string" resultType="PageVotes">
+	<select id="selectVoteWithCustomField" parameterType="string" resultMap="PageVotesResultMap">
 	
 		<!-- 	private Integer itemNum;//vote選項數目
 			private Integer voteNum;//vote的縂得票數
 			private Integer joinerNum;//vote的參加者數量 -->
-		SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum
+		SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,u.ID AS userid ,u.USERNAME AS username ,u.PASSWORD as password
 		FROM VOTES V,
+		Users u,
 		( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
 		( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER = V.ID  GROUP BY (V.ID) ) INU,
-		(SELECT UVI.VOTE AS VOTEID,COUNT(DISTINCT(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
-		WHERE V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND V.ID=#{id}
+		(SELECT UVI.VOTE AS VOTEID,COUNT(distinct(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
+		WHERE V.LAUNCHER = u.ID AND V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND V.ID=#{id}
+		
 	</select>
 	
 	
@@ -60,14 +68,16 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 分页查询votes及其其他信息 -->
-	<select id="selectVoteWithCustomFieldByPage" parameterType="PageVotes" resultType="PageVotes">
+	<select id="selectVoteWithCustomFieldByPage" parameterType="PageVotes" resultMap="PageVotesResultMap">
+	
 		SELECT * FROM (
-		  SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,ROWNUM AS rown
+		  SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,u.ID AS userid ,u.USERNAME AS username ,u.PASSWORD AS PASSOWRD,ROWNUM AS rown
 		  FROM VOTES V,
+		  USERS U,
 		  ( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
-		  ( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER = V.ID GROUP BY (V.ID) ) INU,
+		  ( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER= V.ID GROUP BY (V.ID) ) INU,
 		  (SELECT UVI.VOTE AS VOTEID,COUNT(DISTINCT(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
-		  WHERE V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND ROWNUM &lt;=#{end} ORDER BY v.TIME desc) t
+		  WHERE v.LAUNCHER = u.ID AND V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND ROWNUM &lt;=#{end} ORDER BY v.TIME DESC) t
 		WHERE t.rown &gt;= #{start}
 	</select>
 	
