@@ -13,6 +13,23 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<insert id="insertVote" parameterType="Votes">
 		insert into votes values(#{id},#{theme},#{launcher.id},#{selectWay},#{time})
 	</insert>
+
+
+
+
+
+
+	<resultMap type="PageVotes" id="PageVotesResultMap">
+		<!-- user的表字段与bean字段对应关系 -->
+		<!-- user的主键 -->
+		<id column="id" property="id" />
+		<result column="username" property="username" />
+		<association property="person" javaType="com.kerwin.mybatis.pojo.Person">
+			<id column="p_id" property="id" />
+			<result column="name" property="name" />
+		</association>
+	</resultMap>  
+	
 	<!-- 
 		Title:通过id查询一个vote及其相關信息(關聯查詢)
 		Description:信息包括:vote.*,vote的总票数,vote的选项数,vote总共有多少人参加
@@ -29,6 +46,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		(SELECT UVI.VOTE AS VOTEID,COUNT(DISTINCT(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
 		WHERE V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND V.ID=#{id}
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 分页查询votes及其其他信息 -->
 	<select id="selectVoteWithCustomFieldByPage" parameterType="PageVotes" resultType="PageVotes">
 		SELECT * FROM (

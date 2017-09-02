@@ -39,6 +39,7 @@
 								<c:if test="${v.selectWay eq 0}">
 									单选
 								</c:if>
+								,发起者:${v.launcher.username}
 							</div>
 						</a>
 						

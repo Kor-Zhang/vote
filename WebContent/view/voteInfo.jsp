@@ -24,6 +24,7 @@
 				<label>
 				<%-- 共${v.itemNum}个选项,${v.joinerNum}人参与,共${v.voteNum}票 --%>
 				共${vote.itemNum}个选项,${vote.joinerNum}人参与,共${vote.voteNum}票,
+				
 				<!-- 多选 -->
 				<c:if test="${vote.selectWay eq 1}">
 					多选
@@ -32,7 +33,7 @@
 				<c:if test="${vote.selectWay eq 0}">
 					单选
 				</c:if>
-				
+				,发起者:${vote.launcher.username}
 			</div>
 			
 			<form action="<c:url value='/userVoteItem/userVoteItemAction!vote.action'></c:url>">
