@@ -39,7 +39,8 @@ public class PageVotes extends Votes {
 	private String launcherId;
 	//前台的投票选项
 	private String[] vItems;
-
+	//前台投票选项的id
+	private String[] vItemIds;
 	//存放PageVotes
 	private List<PageVotes> pageVotes;
 	
@@ -57,6 +58,9 @@ public class PageVotes extends Votes {
 	private String kw;
 	
 	
+	//转发地址
+	private String forward;
+	
 	
 	public PageVotes() {
 		super();
@@ -66,6 +70,18 @@ public class PageVotes extends Votes {
 			Timestamp time, List<VoteItems> voteItems) {
 		super(id, theme, selectWay, launcher, time, voteItems);
 		// TODO Auto-generated constructor stub
+	}
+	public String[] getvItemIds() {
+		return vItemIds;
+	}
+	public void setvItemIds(String[] vItemIds) {
+		this.vItemIds = vItemIds;
+	}
+	public String getForward() {
+		return forward;
+	}
+	public void setForward(String forward) {
+		this.forward = forward;
 	}
 	public String getKw() {
 		return kw;

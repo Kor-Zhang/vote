@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import com.zk.vote.action.UsersAction;
+import com.zk.vote.util.Util;
 
 /**
  * Title:检测用户是否在线
@@ -33,6 +34,7 @@ public class CheckUserStatus implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest r = ((HttpServletRequest)req);
 		Object o = r.getSession().getAttribute(UsersAction.ONLINE_USER_FIELD);
+		Util.l.info(CheckUserStatus.class);
 		if( null == o){
 			r.setAttribute("msg", "请先登录");
 			r.getRequestDispatcher("/view/login.jsp").forward(r, res);

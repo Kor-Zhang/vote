@@ -22,7 +22,7 @@
 				<tr>
 					<td class="firstTd">
 						
-						<a class="vote_icon" href="<c:url value='/votes/votesAction!selectVoteWithCustomField.action?id=${v.id}'></c:url>">
+						<a tatget="viewsIframe" class="vote_icon" href="<c:url value='/votes/votesAction!selectVoteWithCustomField.action?id=${v.id}&forward=editVote'></c:url>">
 							${v.theme}
 							<!-- 描述 -->
 							<div class="drecDiv">
@@ -45,7 +45,7 @@
 						
 					</td>
 					<td class="secondTd">
-						<a class="join_icon" href="<c:url value='/votes/votesAction!selectVoteWithCustomField.action?id=${v.id}'></c:url>">我要参与</a>
+						<a tatget="viewsIframe" class="join_icon" href="<c:url value='/votes/votesAction!selectVoteWithCustomField.action?id=${v.id}&forward=editVote'></c:url>">管理</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -54,13 +54,40 @@
 		
 	</div>
 	<div class="pager">
+	
+		<!-- 设置页码 -->	
+		<c:set var="pageRange" value="3"></c:set>
+		<c:set var="pageStart" value="${votes.page - pageRange}"></c:set>
+		<c:set var="pageEnd" value="${votes.page + pageRange}"></c:set>
+		<c:if test="${pageStart le 0}">
+			<c:set var="pageStart" value="1"></c:set>
+		</c:if>
+		<c:if test="${pageEnd gt votes.maxPage}">
+			<c:set var="pageEnd" value="${votes.maxPage}"></c:set>
+		</c:if>
+		[
+			<c:forEach var="v" begin="${pageStart}" end="${pageEnd}">
+				<c:set value="" var="color"></c:set>
+				<c:if test="${votes.page eq v}">
+					<c:set value="red" var="color"></c:set>
+				</c:if>
+				<a style="color: ${color};" href="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPageAndKW.action?page=${v}'></c:url>">${v}</a>
+			</c:forEach>
+		]
+		
+		<!-- //上一页下一页 -->
 		<c:if test="${votes.page gt 1}"><!-- 下载已经是最后一页 -->
-			<a href="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=${votes.page-1}'></c:url>">上一页</a>
+			<a href="<c:url value='/votes/votesAction!selectMyVoteWithCustomFieldByPage.action?page=${votes.page-1}'></c:url>">上一页</a>
 		</c:if>
 		<c:if test="${votes.page lt votes.maxPage}"><!-- 下载已经是最后一页 -->
-			<a href="<c:url value='/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=${votes.page+1}'></c:url>">下一页</a>
+			<a href="<c:url value='/votes/votesAction!selectMyVoteWithCustomFieldByPage.action?page=${votes.page+1}'></c:url>">下一页</a>
 		</c:if>
 		[${votes.page}/${votes.maxPage}]
+		
+		
+		
+		
+		
 	</div>
 
 </div>

@@ -141,4 +141,25 @@ public class UsersAction extends BaseAction implements ModelDriven<PageUsers>{
 		return "login";
 	}
 	
+	
+	/**
+	 * Title:获取当前在线用户
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 上午9:06:37
+	 * @version 1.0
+	 * @throws Exception
+	 */
+	public void getOnlineUser() throws Exception{
+		Users onlineUser = getSessionAttr(UsersAction.ONLINE_USER_FIELD);
+		if(onlineUser != null){
+			onlineUser.setPassword("");
+		}else{
+			onlineUser = new Users();
+		}
+		writeJSON(onlineUser);
+		
+	}
 }

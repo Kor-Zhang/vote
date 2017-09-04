@@ -53,4 +53,48 @@ public interface VotesServiceI {
 	 */
 	public PageVotes selectVoteWithCustomField(String id);
 
+	/**
+	 * Title:分页按userid查询votes及其其他信息
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 上午10:56:30
+	 * @version 1.0
+	 * @param pageBean
+	 * @return
+	 * @throws Exception 
+	 */
+	public PageVotes selectMyVoteWithCustomFieldByPage(PageVotes pageBean) throws Exception;
+
+	
+	/**
+	 * Title:更新一個vote及其相關信息
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 下午3:31:15
+	 * @version 1.0
+	 * @param pageBean
+	 * @return
+	 * @throws Exception
+	 */
+	public void updateVote(PageVotes pageBean) throws Exception;
+
+	/**
+	 * Title:删除指定id的vote及其相关记录
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 下午3:56:08
+	 * @version 1.0
+	 * @param id
+	 * @throws Exception
+	 */
+	public void deleteVote(String id) throws Exception;
+
+
+
 }

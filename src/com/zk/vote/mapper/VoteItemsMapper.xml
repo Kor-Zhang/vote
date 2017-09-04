@@ -16,4 +16,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		VOTE_ITEMS vt
 		WHERE T.vtid= vt.ID
 	</select>
+	<!-- 更新item的描述信息 -->
+	<update id="updateVoteItemDec" parameterType="VoteItems">
+		update vote_items set description=#{description} where id=#{id}
+	</update>
+	
+	
 </mapper>

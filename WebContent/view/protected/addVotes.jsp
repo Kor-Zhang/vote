@@ -76,10 +76,11 @@
 			<div class="controler">
 				<input type="submit" value=""/>
 				<a id="addVoteItemsBtn" href="javascript:void(0);">添加選項</a>
-				<a target="_top" href="<c:url value='/view/index.jsp'></c:url>">取消</a>
+				<a target="_top" href="<c:url value='/view/protected/index.jsp'></c:url>">取消</a>
 			</div>
 		</form>
 	</div>
 </div>
 <script type="text/javascript" src="<c:url value='/plugin/jquery-3.2.1.min.js'></c:url>"></script>
+<script type="text/javascript" src="<c:url value='/js/global.js'></c:url>"></script>
 <script type="text/javascript" src="<c:url value='/js/addVotes.js'></c:url>"></script>

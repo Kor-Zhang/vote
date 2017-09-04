@@ -8,11 +8,11 @@
 	response.setHeader("Cache-Control","no-store");   
 	response.setHeader("Pragma","no-cache");   
 	response.setDateHeader("Expires",0);   
-	
+	Boolean isOnline = (null != session.getAttribute(UsersAction.ONLINE_USER_FIELD));
 	//判断用户是否在线,如果在线,那么直接转发到主页
-	if(null != session.getAttribute(UsersAction.ONLINE_USER_FIELD)){
+	if(isOnline){
 		//转发到主页
-		request.getRequestDispatcher("/view/index.jsp").forward( request,response);
+		request.getRequestDispatcher("/view/protected/index.jsp").forward( request,response);
 		return;
 	}
 	//获取cookie

@@ -12,6 +12,7 @@ import com.zk.vote.mapper.VotesMapper;
 import com.zk.vote.pagebean.PageVoteItems;
 import com.zk.vote.pagebean.PageVotes;
 import com.zk.vote.service.VotesServiceI;
+import com.zk.vote.util.Util;
 
 /**
  * Title:实现VotesServiceI接口
@@ -121,6 +122,77 @@ public class VotesService implements VotesServiceI {
 		
 		
 		return vote;
+	}
+
+	@Override
+	public PageVotes selectMyVoteWithCustomFieldByPage(PageVotes pageBean) throws Exception {
+		
+		//判断是否离线
+		
+		Util.eject(pageBean.getLauncherId() == null , "您已离线!");
+		
+		
+		Integer count = votesMapper.selectCountByUserId(pageBean.getLauncherId());
+		
+		pageBean.setMaxSize(count);
+		
+		//设置user
+		
+		Users u = new Users();
+		u.setId(pageBean.getLauncherId());
+		
+		pageBean.setLauncher(u);
+		
+		//获取并且设置返回指定launcherid的分页的votes集合
+		pageBean.setPageVotes(votesMapper.selectMyVoteWithCustomFieldByPage(pageBean));
+		
+		return pageBean;
+	}
+
+	@Override
+	public void updateVote(PageVotes pageBean) throws Exception {
+		
+
+		if(pageBean.getTheme() ==null || pageBean.getTheme().equals("")){
+			throw new IllegalArgumentException("主题不能为空");
+		}
+		if(pageBean.getvItems() == null || pageBean.getvItems().length==0 ||pageBean.getvItems()[0].equals("")){
+
+			throw new IllegalArgumentException("至少需要一个选项");
+		}
+		//更新选项
+		String[] vItems = pageBean.getvItemIds();
+		String[] vItemIds = pageBean.getvItemIds();
+
+		VoteItems voteItem = new VoteItems();
+		Votes vote = new Votes();
+		vote.setId(pageBean.getId());
+		
+		for (int i = 0; i < vItemIds.length; i++) {
+			String id = vItemIds[i];
+			String item = vItems[i];
+			//设置描述
+			voteItem.setDescription(item);
+			if(id!=null && id.equals("")){//新增选项
+				voteItem.setId(UUID.randomUUID().toString());
+				
+				voteItemsMapper.insertVoteItem(voteItem);
+			}else{
+				voteItem.setId(id);
+				
+				voteItemsMapper.updateVoteItemDec(voteItem);
+			}
+		}
+		
+		//通過id更新投票名字，選項類型
+		votesMapper.updateVote(pageBean);
+		
+	}
+
+	@Override
+	public void deleteVote(String id) throws Exception {
+		votesMapper.deleteVote(id);
+		
 	}
 
 

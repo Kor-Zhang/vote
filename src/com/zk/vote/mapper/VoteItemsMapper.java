@@ -39,4 +39,16 @@ public interface VoteItemsMapper {
 	 * @return
 	 */
 	public List<PageVoteItems> selectVoteItemsWithCustomField(String id);
+
+	/**
+	 * Title:更新投票选项的描述
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 下午5:14:31
+	 * @version 1.0
+	 * @param voteItem
+	 */
+	public void updateVoteItemDec(VoteItems voteItem);
 }

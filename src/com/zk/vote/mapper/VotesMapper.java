@@ -65,6 +65,52 @@ public interface VotesMapper {
 	 */
 	public PageVotes selectVoteWithCustomField(String id);
 	
+	/**
+	 * Title:分页按userid查询votes及其其他信息
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月1日 上午11:05:55
+	 * @version 1.0
+	 * @param pageBean
+	 * @return
+	 */
+	public List<PageVotes> selectMyVoteWithCustomFieldByPage(PageVotes pageBean);
+	/**
+	 * Title:通过userid获取votes总数
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 上午10:58:49
+	 * @version 1.0
+	 * @param userId
+	 * @return
+	 */
+	public Integer selectCountByUserId(String userId);
+	/**
+	 * Title:通過id更新投票名字，選項類型
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 下午3:39:13
+	 * @version 1.0
+	 * @param pageBean
+	 */
+	public void updateVote(PageVotes pageBean);
+	/**
+	 * Title:删除一个vote
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 下午3:57:09
+	 * @version 1.0
+	 * @param id
+	 */
+	public void deleteVote(String id);
 	
 	
 }

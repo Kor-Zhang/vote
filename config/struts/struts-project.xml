@@ -33,11 +33,11 @@
 	<package name="users-package" namespace="/users" extends="base-package">
 		<!-- 全局的result -->
 		<global-results>
-			<result name="index">/view/index.jsp</result>
+			<result name="index">/view/protected/index.jsp</result>
 			<result name="regist">/view/regist.jsp</result>
 			<result name="login">/view/login.jsp</result>
 			
-			<result name="rindex" type="redirect">/view/index.jsp</result>
+			<result name="rindex" type="redirect">/view/protected/index.jsp</result>
 			<result name="rregist" type="redirect">/view/regist.jsp</result>
 			<result name="rlogin" type="redirect">/view/login.jsp</result>
 		</global-results>
@@ -53,13 +53,14 @@
 	<package name="votes-package" namespace="/votes" extends="base-package">
 		<!-- 全局的result -->
 		<global-results>
-			<result name="msg">/view/msg.jsp</result>
-			<result name="votesList">/view/votesList.jsp</result>
-			<result name="addVotes">/view/addVotes.jsp</result>
-			<result name="voteInfo">/view/voteInfo.jsp</result>
+			<result name="msg">/view/protected/msg.jsp</result>
+			<result name="votesList">/view/protected/votesList.jsp</result>
+			<result name="addVotes">/view/protected/addVotes.jsp</result>
+			<result name="voteInfo">/view/protected/voteInfo.jsp</result>
+			<result name="myVotesList">/view/protected/myVotesList.jsp</result>
+			<result name="editVote">/view/protected/editVote.jsp</result>
 			
-			
-			<result name="rvotesList" type="redirect">/view/votesList.jsp</result>
+			<result name="rvotesList" type="redirect">/view/protected/votesList.jsp</result>
 		</global-results>
 		<!-- 配置action -->
 		
@@ -72,13 +73,13 @@
 	<package name="voteItems-package" namespace="/voteItems" extends="base-package">
 		<!-- 全局的result -->
 		<global-results>
-			<result name="msg">/view/msg.jsp</result>
-			<result name="votesList">/view/votesList.jsp</result>
-			<result name="addVotes">/view/addVotes.jsp</result>
-			<result name="voteInfo">/view/voteInfo.jsp</result>
+			<result name="msg">/view/protected/msg.jsp</result>
+			<result name="votesList">/view/protected/votesList.jsp</result>
+			<result name="addVotes">/view/protected/addVotes.jsp</result>
+			<result name="voteInfo">/view/protected/voteInfo.jsp</result>
 			
 			
-			<result name="rvotesList" type="redirect">/view/votesList.jsp</result>
+			<result name="rvotesList" type="redirect">/view/protected/votesList.jsp</result>
 		</global-results>
 		<!-- 配置action -->
 		
@@ -91,13 +92,13 @@
 	<package name="userVoteItem-package" namespace="/userVoteItem" extends="base-package">
 		<!-- 全局的result -->
 		<global-results>
-			<result name="msg">/view/msg.jsp</result>
-			<result name="votesList">/view/votesList.jsp</result>
-			<result name="addVotes">/view/addVotes.jsp</result>
-			<result name="voteInfo">/view/voteInfo.jsp</result>
+			<result name="msg">/view/protected/msg.jsp</result>
+			<result name="votesList">/view/protected/votesList.jsp</result>
+			<result name="addVotes">/view/protected/addVotes.jsp</result>
+			<result name="voteInfo">/view/protected/voteInfo.jsp</result>
 			
 			
-			<result name="rvotesList" type="redirect">/view/votesList.jsp</result>
+			<result name="rvotesList" type="redirect">/view/protected/votesList.jsp</result>
 		</global-results>
 		<!-- 配置action -->
 		

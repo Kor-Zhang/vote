@@ -92,7 +92,7 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 			votesService.insertVotesAndItems(pageBean);
 
 			setRequestAttr("msg", "添加成功");
-			setRequestAttr("curl","/votes/votesAction!selectVoteWithCustomFieldByPage.action?page=1");
+			setRequestAttr("curl","/votes/votesAction!selectVoteWithCustomFieldByPageAndKW.action?page=1&kw=");
 			return "msg";
 		}catch(Exception e){
 			e.printStackTrace();
@@ -114,7 +114,8 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 	 * @return
 	 */
 	public String selectVoteWithCustomField(){
-
+		String forward = getRequestParam("forward");
+		
 		try{
 			pageBean = votesService.selectVoteWithCustomField(pageBean.getId());
 			
@@ -125,6 +126,92 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 			setRequestAttr("msg", e.getMessage());
 		}
 		
-		return "voteInfo";
+		return forward;
+	}
+	
+	/**
+	 * Title:分页按userid查询votes及其其他信息
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 上午10:54:15
+	 * @version 1.0
+	 * @return
+	 */
+	public String selectMyVoteWithCustomFieldByPage(){
+
+		try{
+			//获取当前在线的userid
+			pageBean.setLauncherId(((Users)getSessionAttr(UsersAction.ONLINE_USER_FIELD)).getId());
+			
+			pageBean = votesService.selectMyVoteWithCustomFieldByPage(pageBean);
+			
+			setRequestAttr("votes", pageBean);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			setRequestAttr("msg", e.getMessage());
+		}
+		
+		return "myVotesList";
+	}
+	/**
+	 * Title:更新一個vote及其相關信息
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 下午3:27:36
+	 * @version 1.0
+	 * @return
+	 */
+	public String updateVote(){
+		setRequestAttr("curl", "/votes/votesAction!selectMyVoteWithCustomFieldByPage.action?page=1");
+		try{
+			//設置選項
+			pageBean.setvItems(getRequest().getParameterValues("vItems"));
+			
+			String[] vItems = getRequest().getParameterValues("vItems");
+			String[] vItemIds = getRequest().getParameterValues("vItemIds");
+			
+			pageBean.setvItems(vItems);
+			pageBean.setvItemIds(vItemIds);
+			
+			votesService.updateVote(pageBean);
+			
+			setRequestAttr("msg", "修改成功");
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			setRequestAttr("msg", e.getMessage());
+		}
+		
+		return "msg";
+	}
+	/**
+	 * Title:删除一個vote及其相關信息
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 下午3:27:36
+	 * @version 1.0
+	 * @return
+	 */
+	public String deleteVote(){
+		setRequestAttr("curl", "/votes/votesAction!selectMyVoteWithCustomFieldByPage.action?page=1");
+		try{
+			
+			votesService.deleteVote(pageBean.getId());
+			
+			setRequestAttr("msg", "删除成功");
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			setRequestAttr("msg", e.getMessage());
+		}
+		
+		return "msg";
 	}
 }

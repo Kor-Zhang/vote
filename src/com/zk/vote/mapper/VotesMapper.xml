@@ -70,15 +70,31 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	
 	<sql id="selectVotes">
 	
-		SELECT * FROM (
-		  SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,u.ID AS userid ,u.USERNAME AS username ,u.PASSWORD AS PASSOWRD,ROWNUM AS rown
-		  FROM VOTES V,
-		  USERS U,
-		  ( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
-		  ( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER= V.ID GROUP BY (V.ID) ) INU,
-		  (SELECT UVI.VOTE AS VOTEID,COUNT(DISTINCT(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
-		  WHERE v.LAUNCHER = u.ID AND V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND ROWNUM &lt;=#{end} ORDER BY v.TIME DESC) t
-		WHERE t.rown &gt;= #{start} and T.theme like '%${kw}%'
+		
+		
+		SELECT t1.* 
+		FROM (
+		       SELECT t0.* ,ROWNUM AS myrownum 
+		       FROM (
+		              SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,u.ID AS userid ,u.USERNAME AS username ,u.PASSWORD AS PASSOWRD,ROWNUM AS rown
+		              FROM VOTES V,
+		              USERS U,
+		              ( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
+		              ( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER= V.ID GROUP BY (V.ID) ) INU,
+		              (SELECT UVI.VOTE AS VOTEID,COUNT(DISTINCT(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
+		              WHERE v.LAUNCHER = u.ID AND V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+)
+
+					  <if test="kw!=null and !&quot;&quot;.equals(kw)">
+					  	and V.theme like '%${kw}%'
+					  </if>
+					  ORDER BY v.TIME DESC
+		            ) t0
+		       WHERE ROWNUM &lt;=#{end}
+		     ) t1
+		WHERE t1.myrownum &gt;= #{start}
+		    
+		
+		
 	</sql>
 	
 	
@@ -91,5 +107,49 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			and V.theme like '%${kw}%'
 		</if>	 -->
 	</select>
+	
+	
+	
+	<sql id="selectMyVotes">
+		SELECT t1.* 
+		FROM (
+		       SELECT t0.* ,ROWNUM AS myrownum 
+		       FROM (
+		              SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,u.ID AS userid ,u.USERNAME AS username ,u.PASSWORD AS PASSOWRD,ROWNUM AS rown
+		              FROM VOTES V,
+		              USERS U,
+		              ( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
+		              ( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER= V.ID GROUP BY (V.ID) ) INU,
+		              (SELECT UVI.VOTE AS VOTEID,COUNT(DISTINCT(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
+		              WHERE v.LAUNCHER = u.ID AND V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) and u.id = #{launcher.id}
+					  ORDER BY v.TIME DESC
+		            ) t0
+		       WHERE ROWNUM &lt;=#{end}
+		     ) t1
+		WHERE t1.myrownum &gt;= #{start}
+		
+		
+		
+	</sql>
+	<!-- 分页按userid查询votes及其其他信息 -->
+	<select id="selectMyVoteWithCustomFieldByPage" parameterType="PageVotes" resultMap="PageVotesResultMap">
+		<include refid="selectMyVotes"/>
+	</select>
+	<select id="selectCountByUserId" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM VOTES V,USERS U WHERE V.LAUNCHER=U.ID AND U.ID = #{VALUE}
+	</select>
+	
+	
+	<!-- 通過id更新投票名字，選項類型 -->
+	
+	<update id="updateVote" parameterType="PageVotes">
+		update votes
+		set theme=#{theme},selectWay=#{selectWay}
+		where id = #{id}
+	</update>
+	<!-- 删除一个vote -->
+	<delete id="deleteVote">
+		delete from votes where id = #{id}
+	</delete>
 	
 </mapper>
