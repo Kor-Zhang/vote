@@ -161,7 +161,7 @@ public class VotesService implements VotesServiceI {
 			throw new IllegalArgumentException("至少需要一个选项");
 		}
 		//更新选项
-		String[] vItems = pageBean.getvItemIds();
+		String[] vItems = pageBean.getvItems();
 		String[] vItemIds = pageBean.getvItemIds();
 
 		VoteItems voteItem = new VoteItems();
@@ -171,19 +171,37 @@ public class VotesService implements VotesServiceI {
 		for (int i = 0; i < vItemIds.length; i++) {
 			String id = vItemIds[i];
 			String item = vItems[i];
-			//设置描述
-			voteItem.setDescription(item);
-			if(id!=null && id.equals("")){//新增选项
-				voteItem.setId(UUID.randomUUID().toString());
-				
-				voteItemsMapper.insertVoteItem(voteItem);
-			}else{
-				voteItem.setId(id);
-				
-				voteItemsMapper.updateVoteItemDec(voteItem);
+			
+			if(item !=null && !item.trim().equals("")){
+				//设置描述
+				voteItem.setDescription(item);
+				if(id!=null && !id.trim().equals("")){//新增选项
+					voteItem.setId(id);
+					
+					voteItemsMapper.updateVoteItemDec(voteItem);
+				}else{
+					voteItem.setId(UUID.randomUUID().toString());
+					
+					voteItem.setMaster(vote);
+					
+					voteItemsMapper.insertVoteItem(voteItem);
+					
+				}
+			}
+			
+		}
+		//删除item
+		String[] delItemIds = pageBean.getDelItemIds();
+		String ds = "";
+		for (int i = 0; i < delItemIds.length; i++) {
+			String delItemid = delItemIds[i];
+			ds += delItemid;
+			if(i!=delItemIds.length-1){
+				ds+=",";
 			}
 		}
-		
+		//删除多余的选项
+		voteItemsMapper.deleteVoteItems(ds);
 		//通過id更新投票名字，選項類型
 		votesMapper.updateVote(pageBean);
 		

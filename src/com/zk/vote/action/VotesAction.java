@@ -174,9 +174,11 @@ public class VotesAction extends BaseAction implements ModelDriven<PageVotes>{
 			
 			String[] vItems = getRequest().getParameterValues("vItems");
 			String[] vItemIds = getRequest().getParameterValues("vItemIds");
+			String[] delItemIds = getRequest().getParameterValues("delItemIds");
 			
 			pageBean.setvItems(vItems);
 			pageBean.setvItemIds(vItemIds);
+			pageBean.setDelItemIds(delItemIds);
 			
 			votesService.updateVote(pageBean);
 			

@@ -20,6 +20,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<update id="updateVoteItemDec" parameterType="VoteItems">
 		update vote_items set description=#{description} where id=#{id}
 	</update>
-	
-	
+	<!-- 删除多个选项 -->
+	<delete id="deleteVoteItems" parameterType="String">
+		delete from vote_items where id in(#{value})
+	</delete>
 </mapper>

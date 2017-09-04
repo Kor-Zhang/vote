@@ -20,7 +20,6 @@ var addVotes = {
 	initLis : function() {
 
 		voteItemsNum = $(".voteItemsTr").length;
-		console.info(voteItemsNum);
 		maxItem = 6;
 		// 添加新的选项
 		addVoteItemsBtn.on("click", function() {
@@ -35,7 +34,6 @@ var addVotes = {
 			newTr.find("input[type=text]").val("");
 			//添加删除按钮
 			newTr.find(".tabThirdTd").html("").append("<a class='removeVoteItemsBtn' href='javascript:void(0);'>删除</a>");
-			console.info(newTr.find("input[name='vItemIds']"));
 			//清空id
 			newTr.find("input[name='vItemIds']").val("");
 			voteItemsTr.after(newTr);
@@ -45,7 +43,11 @@ var addVotes = {
 		
 		//删除按钮
 		$(document).on("click",'.removeVoteItemsBtn',function(){
-			$(this).parent().parent().remove();
+			$(this).parent().parent().remove();7
+			var id =$(this).parent().parent().find("input[name='vItemIds']").val();
+			if(id!=""){
+				$(".addVotesForm").append("<input name='delItemIds' value='"+id+"' type='hidden'/>");
+			}
 			
 			--voteItemsNum;
 			
@@ -54,10 +56,8 @@ var addVotes = {
 
 }
 /**
- * 延时加载
+ * iframe不能用延时加载延时加载
  */
-$(function() {
 
-	addVotes.init();
+addVotes.init();
 
-});

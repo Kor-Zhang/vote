@@ -51,4 +51,19 @@ public interface VoteItemsMapper {
 	 * @param voteItem
 	 */
 	public void updateVoteItemDec(VoteItems voteItem);
+
+	
+
+	/**
+	 * Title:删除多个选项
+	 * <p>
+	 * Description:
+	 * <p>
+	 * @author Kor_Zhang
+	 * @date 2017年9月4日 下午7:15:18
+	 * @version 1.0
+	 * @param ds
+	 */
+	public void deleteVoteItems(String ds);
+
 }

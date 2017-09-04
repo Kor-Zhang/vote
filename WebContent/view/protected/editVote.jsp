@@ -96,6 +96,5 @@
 	</div>
 </div>
 <script type="text/javascript" src="<c:url value='/plugin/jquery-3.2.1.min.js'></c:url>"></script>
-<script type="text/javascript" src="<c:url value='/js/global.js'></c:url>"></script>
 <script type="text/javascript" src="<c:url value='/js/editVote.js'></c:url>"></script>
 

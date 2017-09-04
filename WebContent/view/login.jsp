@@ -77,7 +77,7 @@
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="2">
-									<label><input name="rememberMe" type="checkbox"/>记住我</label>
+									<label><input name="rememberMe" checked="checked" type="checkbox"/>记住我</label>
 								</td>
 							</tr>
 							<tr>

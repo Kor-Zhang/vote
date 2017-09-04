@@ -51,10 +51,8 @@ var addVotes = {
 
 }
 /**
- * 延时加载
+ * iframe不能用延时加载延时加载
  */
-$(function() {
 
-	addVotes.init();
+addVotes.init();
 
-});

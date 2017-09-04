@@ -60,6 +60,9 @@ public class PageVotes extends Votes {
 	
 	//转发地址
 	private String forward;
+	//被删除的item的地址
+	private String[] delItemIds;
+	
 	
 	
 	public PageVotes() {
@@ -70,6 +73,12 @@ public class PageVotes extends Votes {
 			Timestamp time, List<VoteItems> voteItems) {
 		super(id, theme, selectWay, launcher, time, voteItems);
 		// TODO Auto-generated constructor stub
+	}
+	public String[] getDelItemIds() {
+		return delItemIds;
+	}
+	public void setDelItemIds(String[] delItemIds) {
+		this.delItemIds = delItemIds;
 	}
 	public String[] getvItemIds() {
 		return vItemIds;
