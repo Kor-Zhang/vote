@@ -2,7 +2,7 @@ package com.zk.vote.action;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.zk.vote.pagebean.PageVoteItems;
-import com.zk.vote.service.impl.VoteItemsService;
+import com.zk.vote.service.VoteItemsServiceI;
 
 /**
  * Title:处理与投票相关的action
@@ -33,13 +33,13 @@ public class VoteItemsAction extends BaseAction implements
 	}
 
 	// voteItemsService
-	private VoteItemsService voteItemsService;
+	private VoteItemsServiceI voteItemsService;
 
-	public VoteItemsService getVoteItemsService() {
+	public VoteItemsServiceI getVoteItemsService() {
 		return voteItemsService;
 	}
 
-	public void setVoteItemsService(VoteItemsService voteItemsService) {
+	public void setVoteItemsService(VoteItemsServiceI voteItemsService) {
 		this.voteItemsService = voteItemsService;
 	}
 

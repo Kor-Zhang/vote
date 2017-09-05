@@ -3,7 +3,7 @@ package com.zk.vote.action;
 import com.opensymphony.xwork2.ModelDriven;
 import com.zk.vote.bean.Users;
 import com.zk.vote.pagebean.PageUserVoteItem;
-import com.zk.vote.service.impl.UserVoteItemService;
+import com.zk.vote.service.UserVoteItemServiceI;
 import com.zk.vote.util.Util;
 
 /**
@@ -35,13 +35,13 @@ public class UserVoteItemAction extends BaseAction implements
 	}
 
 	// userVoteItemService
-	private UserVoteItemService userVoteItemService;
+	private UserVoteItemServiceI userVoteItemService;
 
-	public UserVoteItemService getUserVoteItemService() {
+	public UserVoteItemServiceI getUserVoteItemService() {
 		return userVoteItemService;
 	}
 
-	public void setUserVoteItemService(UserVoteItemService userVoteItemService) {
+	public void setUserVoteItemService(UserVoteItemServiceI userVoteItemService) {
 		this.userVoteItemService = userVoteItemService;
 	}
 	/**
