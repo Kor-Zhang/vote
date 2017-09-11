@@ -1,0 +1,101 @@
+.content {
+	margin-left: 25%;
+	width: 50%;
+	text-align: left;
+}
+
+.top {
+	
+}
+
+.middle {
+	/* margin: 35px 0px; */
+	
+}
+
+.navbar {
+	background: rgba(122, 164, 207, 0.5);
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	font-weight: bold;
+	list-style-type: none;
+}
+.navbar>* {
+	width: 18%;
+	display:block;
+	float: left;
+}
+.navbar form input{
+	float: left;
+	height:100%;
+	border: 3px solid rgba(11, 158, 255,0.5);
+}
+.navbar form input[name='kw']{
+	width:70%;
+	border-top-left-radius:3px;
+	border-bottom-left-radius:3px;
+	border-right:0px;
+}
+.navbar form input[type='submit']{
+	width:25%;
+	border-top-right-radius:3px;
+	border-bottom-right-radius:3px;
+	border-left:0px;
+}
+
+
+.backListIcon {
+	width: 5px;
+	height: 5px;
+	background-image: url('../img/new.gif');
+	background-position: left;
+	background-repeat: no-repeat;
+	padding-left: 12px;
+}
+
+.addVoteIcon {
+	width: 5px;
+	height: 5px;
+	background-image: url('../img/addnew.gif');
+	background-position: left;
+	background-repeat: no-repeat;
+	padding-left: 13px;
+}
+
+.repairIcon {
+	width: 5px;
+	height: 5px;
+	background-image: url('../img/edit.gif');
+	background-position: left;
+	background-repeat: no-repeat;
+	padding-left: 15px;
+}
+
+.searchForm>input[type='submit']{
+	cursor: pointer;;
+}
+.searchForm>input{
+	float: left;
+	margin: 5px auto;
+}
+
+.viewsIframe{
+	border:0px solid rgba(0,0,0,0);
+	width:100%;
+	/* background: red; */
+	height: 700px;
+}
+.displayOnlineNumber{
+	height:20px;
+	line-height: 20px;
+	padding-left: 20px;
+	width:100%;
+	float: left;
+}
+
+.bottom {
+	text-align: center;
+	width: 100%;
+	padding-top: 20px;
+}

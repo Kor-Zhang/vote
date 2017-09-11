@@ -1,0 +1,33 @@
+* {
+	margin: 0px 0px;
+	padding: 0px 0px;
+	font-size: 14px;
+	outline: none;
+}
+
+html, body {
+	width: 100%;
+}
+a {
+	text-decoration: none;
+}
+
+a:link {
+	color: rgb(11, 158, 255);
+	text-decoration: none;
+}
+
+a:visited {
+	color: rgb(11, 158, 255);
+	text-decoration: none;
+}
+
+a:hover {
+	color: red;
+	text-decoration: none;
+}
+
+a:active {
+	color: rgb(11, 158, 255);
+	text-decoration: none;
+}

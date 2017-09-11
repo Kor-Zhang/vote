@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.zk.vote.mapper.VotesMapper">
+
+
+	
+	<select id="selectCountByKW" resultType="int" parameterType="string">
+		SELECT count(*) from votes
+		<where>
+			<if test="value!=null and !&quot;&quot;.equals(value)">
+				 theme like '%${value}%'
+			</if>
+			
+		</where>
+	</select>
+	<insert id="insertVote" parameterType="Votes">
+		insert into votes values(#{id},#{theme},#{launcher.id},#{selectWay},#{time})
+	</insert>
+
+
+
+
+
+
+	<resultMap type="PageVotes" id="PageVotesResultMap">
+		<!-- PageVotes的表字段与bean字段对应关系 -->
+		<!-- PageVotes的主键 -->
+		<id column="id" property="id" />
+		<result column="id" property="id" />
+		<result column="theme" property="theme" />
+		<result column="selectWay" property="selectWay" />
+		<result column="votenum" property="voteNum" />
+		<result column="itemnum" property="itemNum" />
+		<result column="joinernum" property="joinerNum" />
+		<association property="launcher" javaType="Users">
+			<id column="userid" property="id" />
+			<result column="username" property="username" />
+			<result column="password" property="password" />
+		</association>
+	</resultMap>  
+	
+	<!-- 
+		Title:通过id查询一个vote及其相關信息(關聯查詢)
+		Description:信息包括:vote.*,vote的总票数,vote的选项数,vote总共有多少人参加
+	 -->
+	<select id="selectVoteWithCustomField" parameterType="string" resultMap="PageVotesResultMap">
+	
+		<!-- 	private Integer itemNum;//vote選項數目
+			private Integer voteNum;//vote的縂得票數
+			private Integer joinerNum;//vote的參加者數量 -->
+		SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,u.ID AS userid ,u.USERNAME AS username ,u.PASSWORD as password
+		FROM VOTES V,
+		Users u,
+		( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
+		( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER = V.ID  GROUP BY (V.ID) ) INU,
+		(SELECT UVI.VOTE AS VOTEID,COUNT(distinct(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
+		WHERE V.LAUNCHER = u.ID AND V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) AND V.ID=#{id}
+		
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	<sql id="selectVotes">
+	
+		
+		
+		SELECT t1.* 
+		FROM (
+		       SELECT t0.* ,ROWNUM AS myrownum 
+		       FROM (
+		              SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,u.ID AS userid ,u.USERNAME AS username ,u.PASSWORD AS PASSOWRD,ROWNUM AS rown
+		              FROM VOTES V,
+		              USERS U,
+		              ( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
+		              ( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER= V.ID GROUP BY (V.ID) ) INU,
+		              (SELECT UVI.VOTE AS VOTEID,COUNT(DISTINCT(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
+		              WHERE v.LAUNCHER = u.ID AND V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+)
+
+					  <if test="kw!=null and !&quot;&quot;.equals(kw)">
+					  	and V.theme like '%${kw}%'
+					  </if>
+					  ORDER BY v.TIME DESC
+		            ) t0
+		       WHERE ROWNUM &lt;=#{end}
+		     ) t1
+		WHERE t1.myrownum &gt;= #{start}
+		    
+		
+		
+	</sql>
+	
+	
+	
+	
+	<!-- 分页按theme的关键字查询votes及其其他信息 -->
+	<select id="selectVoteWithCustomFieldByPageAndKW" parameterType="PageVotes" resultMap="PageVotesResultMap">
+		<include refid="selectVotes"/>
+		<!-- <if test="kw != null and !&quot;&quot;.equals(kw.trim())">
+			and V.theme like '%${kw}%'
+		</if>	 -->
+	</select>
+	
+	
+	
+	<sql id="selectMyVotes">
+		SELECT t1.* 
+		FROM (
+		       SELECT t0.* ,ROWNUM AS myrownum 
+		       FROM (
+		              SELECT V.*,nvl(VN.VOTENUM,0) as voteNum,nvl(INU.ITEMNUM,0) as itemNum,nvl(JN.JOINERNUM,0) as joinerNum,u.ID AS userid ,u.USERNAME AS username ,u.PASSWORD AS PASSOWRD,ROWNUM AS rown
+		              FROM VOTES V,
+		              USERS U,
+		              ( SELECT UVI.VOTE AS VOTEID,COUNT(UVI.ID) AS VOTENUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) VN,
+		              ( SELECT V.ID AS VOTEID,COUNT(VI.ID) AS ITEMNUM FROM VOTES V,VOTE_ITEMS VI WHERE VI.MASTER= V.ID GROUP BY (V.ID) ) INU,
+		              (SELECT UVI.VOTE AS VOTEID,COUNT(DISTINCT(UVI.JOINER)) AS JOINERNUM FROM USER_VOTE_ITEM UVI GROUP BY (UVI.VOTE)) JN
+		              WHERE v.LAUNCHER = u.ID AND V.ID=VN.VOTEID(+)  AND V.ID =INU.VOTEID(+) AND V.ID = JN.VOTEID(+) and u.id = #{launcher.id}
+					  ORDER BY v.TIME DESC
+		            ) t0
+		       WHERE ROWNUM &lt;=#{end}
+		     ) t1
+		WHERE t1.myrownum &gt;= #{start}
+		
+		
+		
+	</sql>
+	<!-- 分页按userid查询votes及其其他信息 -->
+	<select id="selectMyVoteWithCustomFieldByPage" parameterType="PageVotes" resultMap="PageVotesResultMap">
+		<include refid="selectMyVotes"/>
+	</select>
+	<select id="selectCountByUserId" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM VOTES V,USERS U WHERE V.LAUNCHER=U.ID AND U.ID = #{VALUE}
+	</select>
+	
+	
+	<!-- 通過id更新投票名字，選項類型 -->
+	
+	<update id="updateVote" parameterType="PageVotes">
+		update votes
+		set theme=#{theme},selectWay=#{selectWay}
+		where id = #{id}
+	</update>
+	<!-- 删除一个vote -->
+	<delete id="deleteVote">
+		delete from votes where id = #{id}
+	</delete>
+	
+</mapper>

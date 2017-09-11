@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.zk.vote.mapper.VoteItemsMapper">
+
+	<insert id="insertVoteItem" parameterType="VoteItems">
+		insert into vote_items values(#{id},#{master.id},#{description})
+	</insert>
+	<!-- 通过投票的id查询投票选项的基本信息,并且查詢其票数 -->
+	<select id="selectVoteItemsWithCustomField" parameterType="string" resultType="PageVoteItems">
+		SELECT vt.*,nvl(T.voteNum,0) AS voteNum
+		FROM 
+		(SELECT vt.ID AS vtid,nvl(COUNT(uvi.id),0) AS voteNum FROM USER_VOTE_ITEM uvi,VOTE_ITEMS vt WHERE vt.ID = uvi.VOTEITEM(+) AND vt.MASTER =#{value} GROUP BY (vt.ID)) T,
+		VOTE_ITEMS vt
+		WHERE T.vtid= vt.ID
+	</select>
+	<!-- 更新item的描述信息 -->
+	<update id="updateVoteItemDec" parameterType="VoteItems">
+		update vote_items set description=#{description} where id=#{id}
+	</update>
+	<!-- 删除多个选项 -->
+	<delete id="deleteVoteItems" parameterType="String">
+		delete from vote_items where id in(#{value})
+	</delete>
+</mapper>

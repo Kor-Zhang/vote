@@ -1,6 +1,8 @@
 package com.zk.vote.bean;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -17,7 +19,22 @@ public class Votes implements Serializable {
 	private String theme;
 	private int selectWay;
 	private Users launcher;
+	private Timestamp time;
 	private List<VoteItems> voteItems;
+	public Votes() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Votes(String id, String theme, int selectWay, Users launcher,
+			Timestamp time, List<VoteItems> voteItems) {
+		super();
+		this.id = id;
+		this.theme = theme;
+		this.selectWay = selectWay;
+		this.launcher = launcher;
+		this.time = time;
+		this.voteItems = voteItems;
+	}
 	public String getId() {
 		return id;
 	}
@@ -42,6 +59,12 @@ public class Votes implements Serializable {
 	public void setLauncher(Users launcher) {
 		this.launcher = launcher;
 	}
+	public Timestamp getTime() {
+		return time;
+	}
+	public void setTime(Timestamp time) {
+		this.time = time;
+	}
 	public List<VoteItems> getVoteItems() {
 		return voteItems;
 	}
@@ -51,21 +74,10 @@ public class Votes implements Serializable {
 	@Override
 	public String toString() {
 		return "Votes [id=" + id + ", theme=" + theme + ", selectWay="
-				+ selectWay + ", launcher=" + launcher + ", voteItems="
-				+ voteItems + "]";
+				+ selectWay + ", launcher=" + launcher + ", time=" + time
+				+ ", voteItems=" + voteItems + "]";
 	}
-	public Votes() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Votes(String id, String theme, int selectWay, Users launcher,
-			List<VoteItems> voteItems) {
-		super();
-		this.id = id;
-		this.theme = theme;
-		this.selectWay = selectWay;
-		this.launcher = launcher;
-		this.voteItems = voteItems;
-	}
+	
+	
 	
 }	

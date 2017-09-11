@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.zk.vote.mapper.UserVoteItemMapper">
+	<!-- 添加一条投票记录 -->
+	<insert id="insertOne" parameterType="UserVoteItem">
+		insert into user_vote_item
+		values(#{id},#{joiner.id},#{voteItem.id},#{vote.id})
+	</insert>
+	<!-- 通过投票的id查询投票选项 -->
+	<select id="selectTheVoteOfUser" parameterType="UserVoteItem"
+		resultType="UserVoteItem">
+		SELECT uvi.* 
+		from votes v,USER_VOTE_ITEM uvi 
+		WHERE v.ID = uvi.VOTE AND
+		uvi.JOINER = #{joiner.id} AND v.id=#{vote.id} AND ROWNUM &lt;=1
+	</select>
+</mapper>

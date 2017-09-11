@@ -9,10 +9,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 ">
 	<!-- 在与spring整合时,mybatis提供自动扫描的类,可以扫描mapper成为实例; 
 		要求mapper接口和其xml同名且在同包下; 
-		扫描出来的mapper的bean的id为该mapper接口的首字母小写 -->
+		扫描出来的mapper的bean的id为该mapper接口的首字母小写;
+		该配置写到了spring-mybatis.xml
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<!-- 配置需要扫描的包 -->
+		配置需要扫描的包
 		<property name="basePackage" value="com.zk.vote.mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-	</bean>
+	</bean> -->
 </beans>

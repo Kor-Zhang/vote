@@ -4,12 +4,13 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 	<display-name>vote</display-name>
-	<welcome-file-list>
-		<welcome-file>/view/index.jsp</welcome-file>
-	</welcome-file-list>
+	<!-- <welcome-file-list>
+		<welcome-file>/view/protected/index.jsp</welcome-file>
+	</welcome-file-list> -->
 	<session-config>
 		<session-timeout>1</session-timeout>
 	</session-config>
+
 
 	<filter>
 		<filter-name>struts2</filter-name>
@@ -22,17 +23,43 @@
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>*.action</url-pattern>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
 
-
+	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/spring-base.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
+
+
+
+	<filter>
+		<filter-name>encoder</filter-name>
+		<filter-class>com.zk.vote.filter.Encoder</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoder</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>checkUserStatus</filter-name>
+		<filter-class>com.zk.vote.filter.CheckUserStatus</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>checkUserStatus</filter-name>
+		<!-- /view/protected/*.jsp是不被允许的 -->
+		<url-pattern>/view/protected/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+
+	<listener>
+		<listener-class>com.zk.vote.listener.OnlineUserCounter</listener-class>
 	</listener>
 </web-app>
