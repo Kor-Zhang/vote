@@ -3,15 +3,15 @@
 "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 
-	<!-- 资源文件 -->
-	<constant name="struts.custom.i18n.resources" value="messageResource_zh_CN.properties"/>
+	<!-- 资源文件;格式baseName_language_country.properties;这里的后面的_language_country.properties等不用写;框架会根据当前语境自己去找-->
+	<!-- <constant name="struts.custom.i18n.resources" value="messageResource"/> -->
 	<!-- 指定由spring负责action对象的创建 -->
 	<constant name="struts.objectFactory" value="spring" />
 	<!-- 所有匹配*.action的请求都由struts2处理 -->
 	<!-- <constant name="struts.action.extension" value="action" /> -->
-	<!-- 是否启用开发模式 -->
+	<!-- 是否启用开发模式,类似于struts.configuration.xml.reload -->
 	<constant name="struts.devMode" value="true" />
-	<!-- struts配置文件改动后，是否重新加载 -->
+	<!-- struts的xml配置文件改动后，不需要重启tomcat就可立即加载 -->
 	<constant name="struts.configuration.xml.reload" value="true" />
 	<!-- 设置浏览器是否缓存静态内容 -->
 	<constant name="struts.serve.static.browserCache" value="false" />
